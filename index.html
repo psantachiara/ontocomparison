@@ -20,7 +20,7 @@
   --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --disp:"Archivo Narrow","Helvetica Neue",Arial,sans-serif;
   --prose:"Spectral",Georgia,serif;
-  --spine:72px;
+  --spine:24px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -38,13 +38,13 @@ h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.
   border-right:1px solid var(--rule); background:var(--paper-2);
   z-index:40; overflow:hidden;
 }
-#spine .tk{position:absolute; right:0; width:9px; height:1px; background:var(--rule-2)}
-#spine .tk.maj{width:16px; background:var(--rule-2); opacity:.9}
+#spine .tk{position:absolute; right:0; width:5px; height:1px; background:var(--rule-2)}
+#spine .tk.maj{width:10px; background:var(--rule-2); opacity:.9}
 #spine .brand{
   position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(180deg);
   writing-mode:vertical-rl; white-space:nowrap;
-  font-family:var(--disp); font-size:9.5px; letter-spacing:.34em; color:var(--ink-3);
-  text-transform:uppercase;
+  font-family:var(--disp); font-size:8px; letter-spacing:.3em; color:var(--ink-3);
+  text-transform:uppercase; opacity:.8;
 }
 
 /* ---------- shell ---------- */
@@ -306,7 +306,7 @@ body.lb-open{overflow:hidden}
 </head>
 <body>
 
-<div id="spine" aria-hidden="true"><div class="brand">Barr’s ruled margin</div></div>
+<div id="spine" aria-hidden="true"><div class="brand">Ruled margin</div></div>
 
 <div id="shell">
   <header id="masthead">

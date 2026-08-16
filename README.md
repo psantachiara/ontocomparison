@@ -48,8 +48,9 @@ arguing about in the paper rather than a property of Barr's chart.
 
 ## The two year scales, and only one of them is real
 
-The ruled margin down the left edge of the **page** is an echo of Barr's sheets, which he ruled
-on both sides. It is a border: evenly spaced ticks, no numerals, nothing aligned to it.
+The narrow ruled margin down the left edge of the **page** is an echo of Barr's sheets, which he
+ruled on both sides. It is a border and nothing more: 24px wide, evenly spaced unlabelled ticks,
+nothing aligned to it. Set `--spine` to `0px` in the stylesheet to remove it entirely.
 
 The axis inside each **graph on Plane III** is the real one. Vertical position **is** the date, on the same linear scale Barr ruled on both margins of his
 sheets. Equal vertical gaps are equal spans of time. Horizontal position carries no meaning —
