@@ -3,7 +3,7 @@
     "japanese_prints": {
       "l": "Japanese Prints",
       "t": "source",
-      "y": 1890
+      "y": 1882
     },
     "near_eastern_art": {
       "l": "Near-Eastern Art",
@@ -13,7 +13,7 @@
     "negro_sculpture": {
       "l": "Negro Sculpture",
       "t": "source",
-      "y": 1906
+      "y": 1903
     },
     "machine_esthetic": {
       "l": "Machine Esthetic",
@@ -23,12 +23,12 @@
     "decorative_tendency": {
       "l": "“Decorative tendency”",
       "t": "movement",
-      "y": 1889
+      "y": 1884
     },
     "structural_tendency": {
       "l": "“Structural tendency”",
       "t": "movement",
-      "y": 1889
+      "y": 1883
     },
     "synthetism": {
       "l": "Synthetism",
@@ -143,7 +143,7 @@
     "gauguin": {
       "l": "Gauguin",
       "t": "person",
-      "y": 1889
+      "y": 1886
     },
     "bernard": {
       "l": "Bernard",
@@ -158,12 +158,12 @@
     "cezanne": {
       "l": "Cézanne",
       "t": "person",
-      "y": 1889
+      "y": 1888
     },
     "seurat": {
       "l": "Seurat",
       "t": "person",
-      "y": 1887
+      "y": 1884
     },
     "signac": {
       "l": "Signac",
@@ -183,7 +183,7 @@
     "degas": {
       "l": "Degas",
       "t": "person",
-      "y": 1889
+      "y": 1886
     },
     "matisse": {
       "l": "Matisse",

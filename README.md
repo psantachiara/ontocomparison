@@ -46,11 +46,31 @@ Drawings distinguish the three; **the metrics do not** — PageRank, density and
 all arcs together. That is why Paris ranks first on the jacket, and it is a coding choice worth
 arguing about in the paper rather than a property of Barr's chart.
 
-The year gutter inside each drawing reports the span of dated concepts actually in each row.
-Rows are four-year bands; where a relation forces a concept below its band the row label greys.
-Concepts reached only by siting or membership carry no date of their own in the chart's logic
-(Barr repeats "Paris" inside each oval rather than placing it once), so they sit at the median
-row of their tethers and are excluded from the gutter's reckoning.
+## The year axis
+
+Vertical position **is** the date, on the same linear scale Barr ruled on both margins of his
+sheets. Equal vertical gaps are equal spans of time. Horizontal position carries no meaning —
+it is barycentre ordering, arranged to minimise crossings.
+
+Nothing is banded and nothing is nudged downward to tidy the drawing, so **an arc that runs
+backwards in time is drawn in red and counted in the graph header**. A violation is a
+contradiction in the coding, almost always a mis-dated concept, and is meant to be fixed in the
+data rather than hidden by the layout. Building this axis caught eight bad dates in the shipped
+reconstruction on its first run.
+
+Names in faint italic are not positioned by date. Cities and personnel carry no date in the
+chart's logic, so they sit at the median date of whatever they are attached to.
+
+## Facsimiles
+
+Create an `img/` folder beside `index.html` containing `p15.jpg`, `insert.jpg`, `p19.jpg`,
+`p21.jpg` and `cover.jpg`. Each States card loads its own image automatically and falls back to
+an instruction placeholder when the file is absent; clicking opens the full-size image.
+File names follow the version `id`, so a renamed or added state needs a matching file. A
+`facsimile` path set explicitly in the dataset overrides the convention.
+
+The MoMA Archives sheets (AHB VI.A.38) carry a study-use restriction — check your rights before
+publishing a page that serves them.
 
 ## Replacing the dataset
 
@@ -77,6 +97,4 @@ Comparison of Small-Scale Classifications for Knowledge Organization," NASKO, 20
 Where the two disagree, the figure is shown in red beside the published value. Arc-level fidelity
 is lowest for p15 and p21, the annotated sheets.
 
-Facsimiles are **not** included: the MoMA Archives sheets (AHB VI.A.38) carry a study-use
-restriction. Each state has an empty `facsimile` field — point it at a local file if your rights
-permit, and the card will render it.
+Facsimile images are **not** included in this folder. See *Facsimiles* above.
