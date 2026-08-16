@@ -29,6 +29,29 @@ Planes IV and V are proposed additions to the existing terminological/conceptual
 framework, and they carry the argument: the series is not one line of refinement, and the
 published state's shape has a material cause.
 
+The version bar at the top scopes every plane. Excluding states is the analytically useful
+operation — drop Insert and p21 and what remains is the public register on its own. The strip
+glyph always shows all five cells, greying the excluded ones.
+
+## Relation types
+
+Arcs carry a `rel` tag, assigned at load:
+
+- **influence** — descent. These alone order the vertical axis of the drawings.
+- **siting** — a movement's place. Barr writes "CUBISM / 1906-08 Paris" as one block, so the
+  city is an attribute at the same height, not a successor.
+- **membership** — a movement's personnel.
+
+Drawings distinguish the three; **the metrics do not** — PageRank, density and consensus count
+all arcs together. That is why Paris ranks first on the jacket, and it is a coding choice worth
+arguing about in the paper rather than a property of Barr's chart.
+
+The year gutter inside each drawing reports the span of dated concepts actually in each row.
+Rows are four-year bands; where a relation forces a concept below its band the row label greys.
+Concepts reached only by siting or membership carry no date of their own in the chart's logic
+(Barr repeats "Paris" inside each oval rather than placing it once), so they sit at the median
+row of their tethers and are excluded from the gutter's reckoning.
+
 ## Replacing the dataset
 
 `barr-dataset.json` is the shipped reconstruction. Edit it against your own coding and load it
