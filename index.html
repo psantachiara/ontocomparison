@@ -40,12 +40,6 @@ h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.
 }
 #spine .tk{position:absolute; right:0; width:5px; height:1px; background:var(--rule-2)}
 #spine .tk.maj{width:10px; background:var(--rule-2); opacity:.9}
-#spine .brand{
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%) rotate(180deg);
-  writing-mode:vertical-rl; white-space:nowrap;
-  font-family:var(--disp); font-size:8px; letter-spacing:.3em; color:var(--ink-3);
-  text-transform:uppercase; opacity:.8;
-}
 
 /* ---------- shell ---------- */
 #shell{margin-left:var(--spine)}
@@ -306,7 +300,7 @@ body.lb-open{overflow:hidden}
 </head>
 <body>
 
-<div id="spine" aria-hidden="true"><div class="brand">Ruled margin</div></div>
+<div id="spine" aria-hidden="true"></div>
 
 <div id="shell">
   <header id="masthead">
