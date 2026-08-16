@@ -1,0 +1,1538 @@
+{
+  "concepts": {
+    "japanese_prints": {
+      "l": "Japanese Prints",
+      "t": "source",
+      "y": 1890
+    },
+    "near_eastern_art": {
+      "l": "Near-Eastern Art",
+      "t": "source",
+      "y": 1900
+    },
+    "negro_sculpture": {
+      "l": "Negro Sculpture",
+      "t": "source",
+      "y": 1906
+    },
+    "machine_esthetic": {
+      "l": "Machine Esthetic",
+      "t": "source",
+      "y": 1909
+    },
+    "decorative_tendency": {
+      "l": "“Decorative tendency”",
+      "t": "movement",
+      "y": 1889
+    },
+    "structural_tendency": {
+      "l": "“Structural tendency”",
+      "t": "movement",
+      "y": 1889
+    },
+    "synthetism": {
+      "l": "Synthetism",
+      "t": "movement",
+      "y": 1888
+    },
+    "neo_impressionism": {
+      "l": "Neo-Impressionism",
+      "t": "movement",
+      "y": 1886
+    },
+    "the_bridge": {
+      "l": "“The Bridge”",
+      "t": "movement",
+      "y": 1905
+    },
+    "the_blue_rider": {
+      "l": "“The Blue Rider”",
+      "t": "movement",
+      "y": 1911
+    },
+    "jack_of_diamonds": {
+      "l": "“Jack of Diamonds”",
+      "t": "movement",
+      "y": 1910
+    },
+    "fauvism": {
+      "l": "Fauvism",
+      "t": "movement",
+      "y": 1905
+    },
+    "cubism": {
+      "l": "Cubism",
+      "t": "movement",
+      "y": 1906
+    },
+    "expressionism_abstract": {
+      "l": "Expressionism (Abstract)",
+      "t": "movement",
+      "y": 1911
+    },
+    "futurism": {
+      "l": "Futurism",
+      "t": "movement",
+      "y": 1910
+    },
+    "orphism": {
+      "l": "Orphism",
+      "t": "movement",
+      "y": 1912
+    },
+    "suprematism": {
+      "l": "Suprematism",
+      "t": "movement",
+      "y": 1913
+    },
+    "constructivism": {
+      "l": "Constructivism",
+      "t": "movement",
+      "y": 1914
+    },
+    "de_stijl": {
+      "l": "De Stijl and Neoplasticism",
+      "t": "movement",
+      "y": 1916
+    },
+    "dadaism_abstract": {
+      "l": "Dadaism (Abstract)",
+      "t": "movement",
+      "y": 1916
+    },
+    "purism": {
+      "l": "Purism",
+      "t": "movement",
+      "y": 1918
+    },
+    "bauhaus": {
+      "l": "Bauhaus",
+      "t": "movement",
+      "y": 1919
+    },
+    "modern_architecture": {
+      "l": "Modern Architecture",
+      "t": "movement",
+      "y": 1922
+    },
+    "surrealism_abstract": {
+      "l": "Surrealism (Abstract)",
+      "t": "movement",
+      "y": 1924
+    },
+    "geometrical_abstract_art": {
+      "l": "Geometrical Abstract Art",
+      "t": "movement",
+      "y": 1935
+    },
+    "non_geometrical_abstract_art": {
+      "l": "Non-Geometrical Abstract Art",
+      "t": "movement",
+      "y": 1935
+    },
+    "neo_impressionism_p": {
+      "l": "—",
+      "t": "person",
+      "y": 1890
+    },
+    "van_gogh": {
+      "l": "Van Gogh",
+      "t": "person",
+      "y": 1890
+    },
+    "gauguin": {
+      "l": "Gauguin",
+      "t": "person",
+      "y": 1889
+    },
+    "bernard": {
+      "l": "Bernard",
+      "t": "person",
+      "y": 1889
+    },
+    "denis": {
+      "l": "Denis",
+      "t": "person",
+      "y": 1889
+    },
+    "cezanne": {
+      "l": "Cézanne",
+      "t": "person",
+      "y": 1889
+    },
+    "seurat": {
+      "l": "Seurat",
+      "t": "person",
+      "y": 1887
+    },
+    "signac": {
+      "l": "Signac",
+      "t": "person",
+      "y": 1891
+    },
+    "redon": {
+      "l": "Redon",
+      "t": "person",
+      "y": 1900
+    },
+    "rousseau": {
+      "l": "Rousseau",
+      "t": "person",
+      "y": 1901
+    },
+    "degas": {
+      "l": "Degas",
+      "t": "person",
+      "y": 1889
+    },
+    "matisse": {
+      "l": "Matisse",
+      "t": "person",
+      "y": 1905
+    },
+    "derain": {
+      "l": "Derain",
+      "t": "person",
+      "y": 1905
+    },
+    "picasso": {
+      "l": "Picasso",
+      "t": "person",
+      "y": 1907
+    },
+    "braque": {
+      "l": "Braque",
+      "t": "person",
+      "y": 1908
+    },
+    "gris": {
+      "l": "Gris",
+      "t": "person",
+      "y": 1911
+    },
+    "leger": {
+      "l": "Léger",
+      "t": "person",
+      "y": 1912
+    },
+    "delaunay": {
+      "l": "Delaunay",
+      "t": "person",
+      "y": 1912
+    },
+    "duchamp": {
+      "l": "Duchamp",
+      "t": "person",
+      "y": 1913
+    },
+    "duchamp_villon": {
+      "l": "Duchamp-Villon",
+      "t": "person",
+      "y": 1912
+    },
+    "archipenko": {
+      "l": "Archipenko",
+      "t": "person",
+      "y": 1912
+    },
+    "gleizes": {
+      "l": "Gleizes",
+      "t": "person",
+      "y": 1911
+    },
+    "villon": {
+      "l": "Villon",
+      "t": "person",
+      "y": 1912
+    },
+    "lipchitz": {
+      "l": "Lipchitz",
+      "t": "person",
+      "y": 1915
+    },
+    "brancusi": {
+      "l": "Brancusi",
+      "t": "person",
+      "y": 1912
+    },
+    "kandinsky": {
+      "l": "Kandinsky",
+      "t": "person",
+      "y": 1911
+    },
+    "klee": {
+      "l": "Klee",
+      "t": "person",
+      "y": 1912
+    },
+    "marc": {
+      "l": "Marc",
+      "t": "person",
+      "y": 1912
+    },
+    "feininger": {
+      "l": "Feininger",
+      "t": "person",
+      "y": 1919
+    },
+    "boccioni": {
+      "l": "Boccioni",
+      "t": "person",
+      "y": 1910
+    },
+    "carra": {
+      "l": "Carrà",
+      "t": "person",
+      "y": 1910
+    },
+    "russolo": {
+      "l": "Russolo",
+      "t": "person",
+      "y": 1910
+    },
+    "balla": {
+      "l": "Balla",
+      "t": "person",
+      "y": 1910
+    },
+    "severini": {
+      "l": "Severini",
+      "t": "person",
+      "y": 1910
+    },
+    "malevich": {
+      "l": "Malevich",
+      "t": "person",
+      "y": 1913
+    },
+    "tatlin": {
+      "l": "Tatlin",
+      "t": "person",
+      "y": 1914
+    },
+    "pevsner": {
+      "l": "Pevsner",
+      "t": "person",
+      "y": 1917
+    },
+    "gabo": {
+      "l": "Gabo",
+      "t": "person",
+      "y": 1917
+    },
+    "rodchenko": {
+      "l": "Rodchenko",
+      "t": "person",
+      "y": 1918
+    },
+    "mondrian": {
+      "l": "Mondrian",
+      "t": "person",
+      "y": 1917
+    },
+    "van_doesburg": {
+      "l": "Van Doesburg",
+      "t": "person",
+      "y": 1917
+    },
+    "oud": {
+      "l": "Oud",
+      "t": "person",
+      "y": 1917
+    },
+    "vantongerloo": {
+      "l": "Vantongerloo",
+      "t": "person",
+      "y": 1918
+    },
+    "lissitzky": {
+      "l": "Lissitzky",
+      "t": "person",
+      "y": 1919
+    },
+    "gropius": {
+      "l": "Gropius",
+      "t": "person",
+      "y": 1919
+    },
+    "moholy_nagy": {
+      "l": "Moholy-Nagy",
+      "t": "person",
+      "y": 1922
+    },
+    "albers": {
+      "l": "Albers",
+      "t": "person",
+      "y": 1923
+    },
+    "schlemmer": {
+      "l": "Schlemmer",
+      "t": "person",
+      "y": 1921
+    },
+    "le_corbusier": {
+      "l": "Le Corbusier",
+      "t": "person",
+      "y": 1918
+    },
+    "ozenfant": {
+      "l": "Ozenfant",
+      "t": "person",
+      "y": 1918
+    },
+    "arp": {
+      "l": "Arp",
+      "t": "person",
+      "y": 1916
+    },
+    "ernst": {
+      "l": "Ernst",
+      "t": "person",
+      "y": 1919
+    },
+    "picabia": {
+      "l": "Picabia",
+      "t": "person",
+      "y": 1916
+    },
+    "man_ray": {
+      "l": "Man Ray",
+      "t": "person",
+      "y": 1920
+    },
+    "schwitters": {
+      "l": "Schwitters",
+      "t": "person",
+      "y": 1919
+    },
+    "hausmann": {
+      "l": "Hausmann",
+      "t": "person",
+      "y": 1918
+    },
+    "miro": {
+      "l": "Miró",
+      "t": "person",
+      "y": 1924
+    },
+    "masson": {
+      "l": "Masson",
+      "t": "person",
+      "y": 1924
+    },
+    "kupka": {
+      "l": "Kupka",
+      "t": "person",
+      "y": 1912
+    },
+    "kiesler": {
+      "l": "Kiesler",
+      "t": "person",
+      "y": 1925
+    },
+    "paris": {
+      "l": "Paris",
+      "t": "place",
+      "y": 1890
+    },
+    "pont_aven": {
+      "l": "Pont-Aven",
+      "t": "place",
+      "y": 1888
+    },
+    "provence": {
+      "l": "Provence",
+      "t": "place",
+      "y": 1906
+    },
+    "milan": {
+      "l": "Milan",
+      "t": "place",
+      "y": 1910
+    },
+    "munich": {
+      "l": "Munich",
+      "t": "place",
+      "y": 1911
+    },
+    "moscow": {
+      "l": "Moscow",
+      "t": "place",
+      "y": 1913
+    },
+    "dresden": {
+      "l": "Dresden",
+      "t": "place",
+      "y": 1905
+    },
+    "russia": {
+      "l": "Russia",
+      "t": "place",
+      "y": 1910
+    },
+    "zurich": {
+      "l": "Zurich",
+      "t": "place",
+      "y": 1916
+    },
+    "cologne": {
+      "l": "Cologne",
+      "t": "place",
+      "y": 1918
+    },
+    "berlin": {
+      "l": "Berlin",
+      "t": "place",
+      "y": 1918
+    },
+    "hanover": {
+      "l": "Hanover",
+      "t": "place",
+      "y": 1919
+    },
+    "leyden": {
+      "l": "Leyden",
+      "t": "place",
+      "y": 1917
+    },
+    "holland": {
+      "l": "Holland",
+      "t": "place",
+      "y": 1917
+    },
+    "germany": {
+      "l": "Germany",
+      "t": "place",
+      "y": 1919
+    },
+    "weimar": {
+      "l": "Weimar",
+      "t": "place",
+      "y": 1919
+    },
+    "dessau": {
+      "l": "Dessau",
+      "t": "place",
+      "y": 1925
+    },
+    "barcelona": {
+      "l": "Barcelona",
+      "t": "place",
+      "y": 1935
+    }
+  },
+  "versions": [
+    {
+      "id": "p15",
+      "name": "p15",
+      "order": 1,
+      "explicitOnly": true,
+      "subtitle": "Preliminary sketch",
+      "date": "c. 1935",
+      "facsimile": "",
+      "pragmatic": {
+        "support": "Graphite on a single sheet; no ruled frame, year marks scrawled at left.",
+        "audience": "Barr alone. No sign the sheet was meant to be seen.",
+        "permanence": "Ephemeral working paper; survives by accident of filing.",
+        "constraint": "None beyond the width of the page. Space runs out at the right edge.",
+        "fn": "Thinking. Barr sorts artists into loose national and personal clusters and names two 'tendencies' rather than movements."
+      },
+      "labels": {
+        "fauvism": "the “Fauves”",
+        "cubism": "the Cubists",
+        "futurism": "the Futurists",
+        "negro_sculpture": "Negro art",
+        "suprematism": "Suprematism",
+        "decorative_tendency": "“Decorative tendency toward abstract design…”",
+        "structural_tendency": "“Structural tendency toward abstract design…”"
+      },
+      "nodes": [
+        "japanese_prints",
+        "decorative_tendency",
+        "structural_tendency",
+        "degas",
+        "gauguin",
+        "van_gogh",
+        "cezanne",
+        "seurat",
+        "negro_sculpture",
+        "russia",
+        "jack_of_diamonds",
+        "dresden",
+        "the_bridge",
+        "munich",
+        "the_blue_rider",
+        "kandinsky",
+        "klee",
+        "marc",
+        "matisse",
+        "fauvism",
+        "derain",
+        "paris",
+        "cubism",
+        "picasso",
+        "braque",
+        "gris",
+        "delaunay",
+        "leger",
+        "duchamp",
+        "milan",
+        "futurism",
+        "boccioni",
+        "carra",
+        "russolo",
+        "balla",
+        "severini",
+        "suprematism"
+      ],
+      "edges": [
+        [
+          "japanese_prints",
+          "decorative_tendency"
+        ],
+        [
+          "decorative_tendency",
+          "degas"
+        ],
+        [
+          "decorative_tendency",
+          "gauguin"
+        ],
+        [
+          "decorative_tendency",
+          "van_gogh"
+        ],
+        [
+          "decorative_tendency",
+          "jack_of_diamonds",
+          "w"
+        ],
+        [
+          "decorative_tendency",
+          "the_bridge"
+        ],
+        [
+          "decorative_tendency",
+          "fauvism"
+        ],
+        [
+          "structural_tendency",
+          "cezanne"
+        ],
+        [
+          "structural_tendency",
+          "seurat"
+        ],
+        [
+          "structural_tendency",
+          "cubism",
+          "w"
+        ],
+        [
+          "cezanne",
+          "cubism"
+        ],
+        [
+          "negro_sculpture",
+          "cubism"
+        ],
+        [
+          "jack_of_diamonds",
+          "russia"
+        ],
+        [
+          "the_bridge",
+          "dresden"
+        ],
+        [
+          "the_blue_rider",
+          "munich"
+        ],
+        [
+          "the_bridge",
+          "the_blue_rider",
+          "w"
+        ],
+        [
+          "fauvism",
+          "matisse"
+        ],
+        [
+          "fauvism",
+          "derain"
+        ],
+        [
+          "fauvism",
+          "paris"
+        ],
+        [
+          "fauvism",
+          "the_blue_rider",
+          "w"
+        ],
+        [
+          "the_blue_rider",
+          "kandinsky"
+        ],
+        [
+          "the_blue_rider",
+          "klee"
+        ],
+        [
+          "the_blue_rider",
+          "marc"
+        ],
+        [
+          "fauvism",
+          "cubism",
+          "w"
+        ],
+        [
+          "cubism",
+          "paris"
+        ],
+        [
+          "cubism",
+          "picasso"
+        ],
+        [
+          "cubism",
+          "braque"
+        ],
+        [
+          "cubism",
+          "gris"
+        ],
+        [
+          "cubism",
+          "delaunay"
+        ],
+        [
+          "cubism",
+          "leger"
+        ],
+        [
+          "cubism",
+          "duchamp"
+        ],
+        [
+          "cubism",
+          "futurism",
+          "w"
+        ],
+        [
+          "cubism",
+          "kandinsky",
+          "w"
+        ],
+        [
+          "cubism",
+          "marc",
+          "w"
+        ],
+        [
+          "futurism",
+          "milan"
+        ],
+        [
+          "futurism",
+          "boccioni"
+        ],
+        [
+          "futurism",
+          "carra"
+        ],
+        [
+          "futurism",
+          "russolo"
+        ],
+        [
+          "futurism",
+          "balla"
+        ],
+        [
+          "futurism",
+          "severini"
+        ],
+        [
+          "futurism",
+          "duchamp",
+          "w"
+        ],
+        [
+          "cubism",
+          "suprematism",
+          "w"
+        ]
+      ]
+    },
+    {
+      "id": "insert",
+      "name": "Insert",
+      "order": 2,
+      "subtitle": "Catalogue insert",
+      "date": "1936",
+      "facsimile": "",
+      "pragmatic": {
+        "support": "Fold-out sheet, bound into the catalogue but opening beyond its trim.",
+        "audience": "Reader of the catalogue, at a desk, with time.",
+        "permanence": "Printed and issued, but subordinate to the book — a supplement.",
+        "constraint": "The fold buys area. Density is affordable here and nowhere else.",
+        "fn": "Documenting. Every movement is loaded with its personnel; the chart works as a register."
+      },
+      "labels": {
+        "expressionism_abstract": "Abstract Expressionism",
+        "dadaism_abstract": "(Abstract) Dadaism",
+        "surrealism_abstract": "(Abstract) Surrealism"
+      },
+      "nodes": [
+        "japanese_prints",
+        "near_eastern_art",
+        "negro_sculpture",
+        "machine_esthetic",
+        "synthetism",
+        "neo_impressionism",
+        "fauvism",
+        "cubism",
+        "expressionism_abstract",
+        "futurism",
+        "orphism",
+        "suprematism",
+        "constructivism",
+        "de_stijl",
+        "dadaism_abstract",
+        "purism",
+        "bauhaus",
+        "surrealism_abstract",
+        "geometrical_abstract_art",
+        "non_geometrical_abstract_art",
+        "paris",
+        "munich",
+        "milan",
+        "moscow",
+        "holland",
+        "weimar",
+        "dessau",
+        "zurich",
+        "cologne",
+        "berlin",
+        "hanover",
+        "van_gogh",
+        "gauguin",
+        "bernard",
+        "denis",
+        "cezanne",
+        "seurat",
+        "signac",
+        "redon",
+        "rousseau",
+        "matisse",
+        "derain",
+        "picasso",
+        "braque",
+        "gris",
+        "leger",
+        "delaunay",
+        "duchamp",
+        "archipenko",
+        "duchamp_villon",
+        "gleizes",
+        "lipchitz",
+        "brancusi",
+        "kandinsky",
+        "klee",
+        "marc",
+        "feininger",
+        "boccioni",
+        "carra",
+        "russolo",
+        "balla",
+        "severini",
+        "malevich",
+        "tatlin",
+        "pevsner",
+        "gabo",
+        "rodchenko",
+        "mondrian",
+        "van_doesburg",
+        "oud",
+        "vantongerloo",
+        "lissitzky",
+        "gropius",
+        "moholy_nagy",
+        "le_corbusier",
+        "ozenfant",
+        "arp",
+        "ernst",
+        "picabia",
+        "man_ray",
+        "miro",
+        "kupka"
+      ],
+      "edges": [
+        [
+          "redon",
+          "dadaism_abstract",
+          "w"
+        ],
+        [
+          "redon",
+          "surrealism_abstract",
+          "w"
+        ],
+        [
+          "brancusi",
+          "constructivism"
+        ],
+        [
+          "brancusi",
+          "non_geometrical_abstract_art"
+        ],
+        [
+          "expressionism_abstract",
+          "surrealism_abstract",
+          "w"
+        ]
+      ]
+    },
+    {
+      "id": "p19",
+      "name": "p19",
+      "order": 3,
+      "subtitle": "Chart draft",
+      "date": "1936",
+      "facsimile": "",
+      "pragmatic": {
+        "support": "Ink and graphite on a ruled sheet; year axis drawn on both margins.",
+        "audience": "The printer, and Barr checking the printer.",
+        "permanence": "Intermediate. Made to be superseded by a plate.",
+        "constraint": "One page, one opening. The frame is now fixed before the content is.",
+        "fn": "Schematising. Persons drop away; the chart becomes a diagram of movements and cities."
+      },
+      "labels": {
+        "expressionism_abstract": "ABSTRACT EXPRESSIONISM",
+        "dadaism_abstract": "(ABSTRACT) DADAISM",
+        "surrealism_abstract": "(ABSTRACT) SURREALISM",
+        "geometrical_abstract_art": "CONTEMPORARY GEOMETRICAL ABSTRACT ART",
+        "non_geometrical_abstract_art": "CONTEMPORARY NON-GEOMETRICAL ABSTRACT ART"
+      },
+      "nodes": [
+        "japanese_prints",
+        "near_eastern_art",
+        "negro_sculpture",
+        "machine_esthetic",
+        "synthetism",
+        "neo_impressionism",
+        "fauvism",
+        "cubism",
+        "expressionism_abstract",
+        "futurism",
+        "orphism",
+        "suprematism",
+        "constructivism",
+        "de_stijl",
+        "dadaism_abstract",
+        "purism",
+        "bauhaus",
+        "surrealism_abstract",
+        "geometrical_abstract_art",
+        "non_geometrical_abstract_art",
+        "gauguin",
+        "van_gogh",
+        "cezanne",
+        "seurat",
+        "rousseau",
+        "paris",
+        "munich",
+        "milan",
+        "moscow",
+        "holland",
+        "germany",
+        "weimar",
+        "dessau",
+        "zurich",
+        "cologne",
+        "berlin"
+      ],
+      "edges": []
+    },
+    {
+      "id": "p21",
+      "name": "p21",
+      "order": 4,
+      "subtitle": "Annotated chart",
+      "date": "1936",
+      "facsimile": "",
+      "pragmatic": {
+        "support": "A p19-type sheet overwritten in a second, smaller hand; names crowd into the ovals.",
+        "audience": "Barr again, verifying the schema against the checklist.",
+        "permanence": "Working. The annotation damages the legibility of the thing annotated.",
+        "constraint": "Annotation over an existing structure — no room to redraw, only to overwrite.",
+        "fn": "Loading. Barr tests whether the movement categories can carry their evidence."
+      },
+      "labels": {
+        "expressionism_abstract": "ABSTRACT EXPRESSIONISM",
+        "dadaism_abstract": "ABSTRACT DADAISM",
+        "surrealism_abstract": "ABSTRACT SURREALISM"
+      },
+      "nodes": [
+        "japanese_prints",
+        "near_eastern_art",
+        "negro_sculpture",
+        "machine_esthetic",
+        "synthetism",
+        "neo_impressionism",
+        "fauvism",
+        "cubism",
+        "expressionism_abstract",
+        "futurism",
+        "orphism",
+        "suprematism",
+        "constructivism",
+        "de_stijl",
+        "dadaism_abstract",
+        "purism",
+        "bauhaus",
+        "surrealism_abstract",
+        "geometrical_abstract_art",
+        "non_geometrical_abstract_art",
+        "paris",
+        "munich",
+        "milan",
+        "moscow",
+        "holland",
+        "weimar",
+        "dessau",
+        "zurich",
+        "berlin",
+        "barcelona",
+        "van_gogh",
+        "gauguin",
+        "cezanne",
+        "seurat",
+        "rousseau",
+        "matisse",
+        "derain",
+        "picasso",
+        "braque",
+        "gris",
+        "leger",
+        "delaunay",
+        "duchamp",
+        "archipenko",
+        "brancusi",
+        "kandinsky",
+        "klee",
+        "marc",
+        "boccioni",
+        "carra",
+        "russolo",
+        "balla",
+        "severini",
+        "malevich",
+        "tatlin",
+        "pevsner",
+        "gabo",
+        "mondrian",
+        "van_doesburg",
+        "lissitzky",
+        "gropius",
+        "moholy_nagy",
+        "le_corbusier",
+        "ozenfant",
+        "arp",
+        "ernst",
+        "picabia",
+        "man_ray",
+        "miro"
+      ],
+      "edges": [
+        [
+          "brancusi",
+          "constructivism"
+        ],
+        [
+          "brancusi",
+          "expressionism_abstract",
+          "w"
+        ],
+        [
+          "expressionism_abstract",
+          "surrealism_abstract",
+          "w"
+        ]
+      ]
+    },
+    {
+      "id": "cover",
+      "name": "Cover",
+      "order": 5,
+      "subtitle": "Dust jacket, published",
+      "date": "1936",
+      "facsimile": "",
+      "pragmatic": {
+        "support": "Two-colour offset on a printed dust jacket. Black linework, oxblood overprint.",
+        "audience": "A stranger in a bookshop, at arm's length, for a few seconds.",
+        "permanence": "Fixed and mass-reproduced. This is the version that enters circulation.",
+        "constraint": "Legibility at distance, two inks, and a title band eating the lower third.",
+        "fn": "Declaring. The chart argues a thesis about modern art rather than recording one."
+      },
+      "labels": {
+        "expressionism_abstract": "[ABSTRACT] EXPRESSIONISM",
+        "dadaism_abstract": "[ABSTRACT] DADAISM",
+        "surrealism_abstract": "[ABSTRACT] SURREALISM",
+        "geometrical_abstract_art": "GEOMETRICAL ABSTRACT ART",
+        "non_geometrical_abstract_art": "NON-GEOMETRICAL ABSTRACT ART"
+      },
+      "nodes": [
+        "japanese_prints",
+        "near_eastern_art",
+        "negro_sculpture",
+        "machine_esthetic",
+        "synthetism",
+        "neo_impressionism",
+        "fauvism",
+        "cubism",
+        "expressionism_abstract",
+        "futurism",
+        "orphism",
+        "suprematism",
+        "constructivism",
+        "de_stijl",
+        "dadaism_abstract",
+        "purism",
+        "bauhaus",
+        "modern_architecture",
+        "surrealism_abstract",
+        "geometrical_abstract_art",
+        "non_geometrical_abstract_art",
+        "gauguin",
+        "cezanne",
+        "seurat",
+        "van_gogh",
+        "redon",
+        "rousseau",
+        "brancusi",
+        "paris",
+        "munich",
+        "milan",
+        "moscow",
+        "weimar",
+        "dessau",
+        "zurich",
+        "cologne",
+        "berlin",
+        "leyden",
+        "pont_aven",
+        "provence"
+      ],
+      "edges": [
+        [
+          "machine_esthetic",
+          "modern_architecture"
+        ],
+        [
+          "machine_esthetic",
+          "orphism"
+        ],
+        [
+          "machine_esthetic",
+          "suprematism"
+        ],
+        [
+          "de_stijl",
+          "modern_architecture"
+        ],
+        [
+          "purism",
+          "modern_architecture"
+        ],
+        [
+          "bauhaus",
+          "modern_architecture"
+        ],
+        [
+          "modern_architecture",
+          "geometrical_abstract_art"
+        ],
+        [
+          "cubism",
+          "orphism"
+        ],
+        [
+          "orphism",
+          "suprematism",
+          "w"
+        ],
+        [
+          "redon",
+          "dadaism_abstract",
+          "w"
+        ],
+        [
+          "redon",
+          "surrealism_abstract",
+          "w"
+        ],
+        [
+          "near_eastern_art",
+          "expressionism_abstract",
+          "w"
+        ],
+        [
+          "redon",
+          "expressionism_abstract",
+          "w"
+        ],
+        [
+          "brancusi",
+          "constructivism"
+        ],
+        [
+          "brancusi",
+          "non_geometrical_abstract_art"
+        ]
+      ]
+    }
+  ],
+  "members": {
+    "synthetism": [
+      "bernard",
+      "denis"
+    ],
+    "neo_impressionism": [
+      "signac"
+    ],
+    "fauvism": [
+      "matisse",
+      "derain"
+    ],
+    "cubism": [
+      "picasso",
+      "braque",
+      "gris",
+      "leger",
+      "archipenko",
+      "duchamp_villon",
+      "gleizes",
+      "villon",
+      "lipchitz"
+    ],
+    "expressionism_abstract": [
+      "kandinsky",
+      "klee",
+      "marc",
+      "feininger"
+    ],
+    "futurism": [
+      "boccioni",
+      "carra",
+      "russolo",
+      "balla",
+      "severini"
+    ],
+    "orphism": [
+      "delaunay",
+      "kupka"
+    ],
+    "suprematism": [
+      "malevich"
+    ],
+    "constructivism": [
+      "tatlin",
+      "pevsner",
+      "gabo",
+      "rodchenko",
+      "lissitzky"
+    ],
+    "de_stijl": [
+      "mondrian",
+      "van_doesburg",
+      "oud",
+      "vantongerloo"
+    ],
+    "purism": [
+      "le_corbusier",
+      "ozenfant"
+    ],
+    "bauhaus": [
+      "gropius",
+      "moholy_nagy",
+      "albers",
+      "schlemmer"
+    ],
+    "dadaism_abstract": [
+      "arp",
+      "duchamp",
+      "picabia",
+      "ernst",
+      "man_ray",
+      "schwitters",
+      "hausmann"
+    ],
+    "surrealism_abstract": [
+      "miro",
+      "masson",
+      "ernst",
+      "arp",
+      "picasso",
+      "man_ray"
+    ],
+    "the_blue_rider": [
+      "kandinsky",
+      "klee",
+      "marc"
+    ]
+  },
+  "skeleton": [
+    [
+      "japanese_prints",
+      "van_gogh"
+    ],
+    [
+      "japanese_prints",
+      "synthetism"
+    ],
+    [
+      "japanese_prints",
+      "fauvism"
+    ],
+    [
+      "synthetism",
+      "fauvism"
+    ],
+    [
+      "van_gogh",
+      "fauvism"
+    ],
+    [
+      "cezanne",
+      "fauvism"
+    ],
+    [
+      "cezanne",
+      "cubism"
+    ],
+    [
+      "seurat",
+      "neo_impressionism"
+    ],
+    [
+      "gauguin",
+      "synthetism"
+    ],
+    [
+      "neo_impressionism",
+      "fauvism"
+    ],
+    [
+      "neo_impressionism",
+      "cubism"
+    ],
+    [
+      "near_eastern_art",
+      "fauvism"
+    ],
+    [
+      "negro_sculpture",
+      "fauvism"
+    ],
+    [
+      "negro_sculpture",
+      "cubism"
+    ],
+    [
+      "rousseau",
+      "cubism"
+    ],
+    [
+      "fauvism",
+      "expressionism_abstract"
+    ],
+    [
+      "cubism",
+      "futurism"
+    ],
+    [
+      "cubism",
+      "orphism"
+    ],
+    [
+      "cubism",
+      "suprematism"
+    ],
+    [
+      "cubism",
+      "constructivism"
+    ],
+    [
+      "cubism",
+      "de_stijl"
+    ],
+    [
+      "cubism",
+      "purism"
+    ],
+    [
+      "cubism",
+      "dadaism_abstract"
+    ],
+    [
+      "machine_esthetic",
+      "futurism"
+    ],
+    [
+      "machine_esthetic",
+      "constructivism"
+    ],
+    [
+      "machine_esthetic",
+      "de_stijl"
+    ],
+    [
+      "machine_esthetic",
+      "purism"
+    ],
+    [
+      "machine_esthetic",
+      "bauhaus"
+    ],
+    [
+      "futurism",
+      "constructivism"
+    ],
+    [
+      "futurism",
+      "dadaism_abstract"
+    ],
+    [
+      "suprematism",
+      "constructivism"
+    ],
+    [
+      "suprematism",
+      "de_stijl"
+    ],
+    [
+      "constructivism",
+      "bauhaus"
+    ],
+    [
+      "de_stijl",
+      "bauhaus"
+    ],
+    [
+      "expressionism_abstract",
+      "dadaism_abstract"
+    ],
+    [
+      "dadaism_abstract",
+      "surrealism_abstract"
+    ],
+    [
+      "expressionism_abstract",
+      "non_geometrical_abstract_art"
+    ],
+    [
+      "surrealism_abstract",
+      "non_geometrical_abstract_art"
+    ],
+    [
+      "constructivism",
+      "geometrical_abstract_art"
+    ],
+    [
+      "de_stijl",
+      "geometrical_abstract_art"
+    ],
+    [
+      "purism",
+      "geometrical_abstract_art"
+    ],
+    [
+      "bauhaus",
+      "geometrical_abstract_art"
+    ],
+    [
+      "suprematism",
+      "geometrical_abstract_art"
+    ]
+  ],
+  "sited": {
+    "synthetism": [
+      "pont_aven",
+      "paris"
+    ],
+    "neo_impressionism": [
+      "paris"
+    ],
+    "cezanne": [
+      "provence"
+    ],
+    "fauvism": [
+      "paris"
+    ],
+    "cubism": [
+      "paris"
+    ],
+    "expressionism_abstract": [
+      "munich"
+    ],
+    "futurism": [
+      "milan"
+    ],
+    "orphism": [
+      "paris"
+    ],
+    "suprematism": [
+      "moscow"
+    ],
+    "constructivism": [
+      "moscow",
+      "berlin"
+    ],
+    "de_stijl": [
+      "leyden",
+      "holland",
+      "germany"
+    ],
+    "purism": [
+      "paris"
+    ],
+    "bauhaus": [
+      "weimar",
+      "dessau"
+    ],
+    "dadaism_abstract": [
+      "zurich",
+      "paris",
+      "cologne",
+      "berlin",
+      "hanover"
+    ],
+    "surrealism_abstract": [
+      "paris"
+    ],
+    "rousseau": [
+      "paris"
+    ],
+    "brancusi": [
+      "paris"
+    ],
+    "redon": [
+      "paris"
+    ],
+    "the_bridge": [
+      "dresden"
+    ],
+    "the_blue_rider": [
+      "munich"
+    ],
+    "jack_of_diamonds": [
+      "russia"
+    ],
+    "non_geometrical_abstract_art": [
+      "barcelona"
+    ]
+  }
+}

@@ -1,0 +1,1739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five States of a Chart — a comparison instrument for Barr's Cubism and Abstract Art diagrams</title>
+<meta name="description" content="An interactive five-plane comparison of Alfred H. Barr, Jr.'s successive chart drafts for Cubism and Abstract Art (MoMA, 1936).">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow:wght@500;600;700&family=Spectral:ital,wght@0,300;0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#E9E7E1; --paper-2:#E1DFD8; --paper-3:#D6D4CC; --card:#F1EFEA;
+  --rule:#C7C6BE; --rule-2:#B4B3AA;
+  --ink:#2A2C27; --ink-2:#5F6259; --ink-3:#8B8E85;
+  --oxblood:#8C2F22; --oxblood-soft:#B4675C;
+  --indigo:#31506E; --moss:#4A6B54; --ochre:#8A6B22;
+  --t-movement:#2A2C27; --t-person:#31506E; --t-place:#4A6B54; --t-source:#8C2F22;
+  --shadow:0 1px 0 rgba(42,44,39,.06), 0 2px 10px rgba(42,44,39,.06);
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --disp:"Archivo Narrow","Helvetica Neue",Arial,sans-serif;
+  --prose:"Spectral",Georgia,serif;
+  --spine:72px;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--prose); font-size:15px; line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--oxblood)}
+h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.01em; line-height:1.15}
+
+/* ---------- the year spine: Barr's own device, made the app's ---------- */
+#spine{
+  position:fixed; left:0; top:0; bottom:0; width:var(--spine);
+  border-right:1px solid var(--rule); background:var(--paper-2);
+  z-index:40; overflow:hidden;
+}
+#spine .yr{
+  position:absolute; left:0; right:0; padding-right:9px; text-align:right;
+  font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.06em;
+}
+#spine .yr::after{content:""; position:absolute; right:0; top:50%; width:7px; height:1px; background:var(--rule-2)}
+#spine .yr.maj{color:var(--ink-2); font-weight:600}
+#spine .brand{
+  position:absolute; bottom:14px; left:0; right:0; text-align:center;
+  font-family:var(--disp); font-size:10px; letter-spacing:.16em; color:var(--ink-3);
+  text-transform:uppercase;
+}
+
+/* ---------- shell ---------- */
+#shell{margin-left:var(--spine)}
+#masthead{
+  border-bottom:1px solid var(--rule); background:var(--paper);
+  padding:22px 30px 0;
+}
+#masthead .kicker{
+  font-family:var(--disp); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
+  color:var(--oxblood); font-weight:600;
+}
+#masthead h1{
+  font-size:clamp(28px,4.2vw,46px); font-weight:700; text-transform:uppercase;
+  letter-spacing:-.005em; margin:4px 0 2px; max-width:34ch;
+}
+#masthead .sub{
+  font-size:14px; color:var(--ink-2); max-width:62ch; margin:0 0 16px;
+  font-style:italic;
+}
+
+/* ---------- version chips: persistent control surface ---------- */
+#versionbar{
+  display:flex; gap:0; flex-wrap:wrap; align-items:stretch;
+  border-top:1px solid var(--rule); margin:0 -30px; padding:0 30px;
+  background:var(--paper-2);
+}
+.vchip{
+  appearance:none; border:0; border-right:1px solid var(--rule);
+  background:transparent; cursor:pointer; text-align:left;
+  padding:10px 16px 11px; min-width:132px; position:relative;
+  font-family:inherit; color:var(--ink-3); transition:background .12s,color .12s;
+}
+.vchip:first-child{border-left:1px solid var(--rule)}
+.vchip .vn{font-family:var(--disp); font-size:16px; font-weight:700; letter-spacing:.02em; display:block}
+.vchip .vs{font-family:var(--mono); font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; display:block; margin-top:1px}
+.vchip .vc{font-family:var(--mono); font-size:10px; margin-top:5px; display:block}
+.vchip:hover{background:var(--paper-3); color:var(--ink-2)}
+.vchip.on{background:var(--card); color:var(--ink)}
+.vchip.on::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--oxblood)}
+.vchip:focus-visible{outline:2px solid var(--indigo); outline-offset:-2px}
+#versionbar .vhint{
+  align-self:center; margin-left:auto; padding:0 4px;
+  font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.04em;
+}
+
+/* ---------- plane nav ---------- */
+#planenav{
+  display:flex; gap:0; overflow-x:auto; background:var(--paper);
+  border-bottom:1px solid var(--rule); padding:0 30px; position:sticky; top:0; z-index:30;
+}
+.pnav{
+  appearance:none; background:transparent; border:0; cursor:pointer;
+  padding:13px 18px 12px; white-space:nowrap; font-family:var(--disp);
+  font-size:13px; letter-spacing:.09em; text-transform:uppercase; font-weight:600;
+  color:var(--ink-3); border-bottom:2px solid transparent;
+}
+.pnav b{font-family:var(--mono); font-weight:500; font-size:10px; margin-right:7px; opacity:.75}
+.pnav:hover{color:var(--ink-2)}
+.pnav.on{color:var(--ink); border-bottom-color:var(--oxblood)}
+.pnav:focus-visible{outline:2px solid var(--indigo); outline-offset:-4px}
+
+/* ---------- panes ---------- */
+main{padding:26px 30px 90px; max-width:1500px}
+.pane{display:none}
+.pane.on{display:block; animation:fade .22s ease-out}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.lede{max-width:70ch; font-size:16px; color:var(--ink-2); margin:0 0 24px}
+.lede strong{color:var(--ink); font-weight:600}
+h2.ph{font-size:22px; text-transform:uppercase; letter-spacing:.03em; margin:0 0 3px}
+h3.sh{
+  font-family:var(--disp); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-2); font-weight:600; margin:34px 0 12px;
+  padding-bottom:6px; border-bottom:1px solid var(--rule);
+}
+h3.sh:first-of-type{margin-top:8px}
+h3.sh span{float:right; font-family:var(--mono); font-size:10px; letter-spacing:.04em; color:var(--ink-3); text-transform:none}
+
+.note{font-size:13.5px; color:var(--ink-2); max-width:74ch; margin:10px 0 0; font-style:italic}
+.grid{display:grid; gap:16px}
+.card{background:var(--card); border:1px solid var(--rule); padding:16px 18px; box-shadow:var(--shadow)}
+.card h4{font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); margin-bottom:8px}
+
+/* ---------- the version strip glyph: the incidence table, atomised ---------- */
+.strip{display:inline-flex; gap:2px; vertical-align:middle}
+.strip i{
+  width:9px; height:14px; display:block; border:1px solid var(--rule-2);
+  background:transparent; border-radius:1px;
+}
+.strip i.p{background:var(--ink); border-color:var(--ink)}
+.strip i.p.last{background:var(--oxblood); border-color:var(--oxblood)}
+.strip.sm i{width:7px; height:11px}
+
+/* ---------- tables ---------- */
+table.dt{border-collapse:collapse; width:100%; font-family:var(--mono); font-size:11.5px}
+table.dt th{
+  text-align:left; font-family:var(--disp); font-size:10px; letter-spacing:.12em;
+  text-transform:uppercase; color:var(--ink-2); font-weight:600;
+  padding:7px 10px; border-bottom:1px solid var(--rule-2); white-space:nowrap;
+}
+table.dt td{padding:6px 10px; border-bottom:1px solid var(--rule); vertical-align:middle}
+table.dt tr:hover td{background:var(--paper-2)}
+table.dt td.num,table.dt th.num{text-align:right; font-variant-numeric:tabular-nums}
+table.dt td.lbl{font-family:var(--prose); font-size:13px}
+.tw{overflow-x:auto; border:1px solid var(--rule); background:var(--card)}
+.pill{
+  font-family:var(--mono); font-size:9px; letter-spacing:.06em; text-transform:uppercase;
+  padding:2px 6px; border:1px solid currentColor; border-radius:2px; white-space:nowrap;
+}
+.t-movement{color:var(--t-movement)} .t-person{color:var(--t-person)}
+.t-place{color:var(--t-place)} .t-source{color:var(--t-source)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
+
+/* ---------- controls ---------- */
+.ctl{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin:0 0 14px}
+.ctl label{font-family:var(--disp); font-size:10px; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-2); font-weight:600}
+input[type=search],select{
+  font-family:var(--mono); font-size:12px; padding:6px 9px;
+  border:1px solid var(--rule-2); background:var(--card); color:var(--ink); border-radius:0;
+}
+input[type=search]{min-width:210px}
+input[type=range]{accent-color:var(--oxblood); width:190px}
+.seg{display:inline-flex; border:1px solid var(--rule-2)}
+.seg button{
+  appearance:none; border:0; border-right:1px solid var(--rule-2); background:var(--card);
+  font-family:var(--mono); font-size:10.5px; letter-spacing:.05em; padding:6px 11px; cursor:pointer; color:var(--ink-2);
+}
+.seg button:last-child{border-right:0}
+.seg button.on{background:var(--ink); color:var(--paper)}
+.seg button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--indigo); outline-offset:1px}
+button.mini{
+  appearance:none; border:1px solid var(--rule-2); background:var(--card); cursor:pointer;
+  font-family:var(--mono); font-size:10.5px; padding:5px 10px; color:var(--ink-2);
+}
+button.mini:hover{background:var(--paper-3); color:var(--ink)}
+
+/* ---------- graph ---------- */
+.gwrap{border:1px solid var(--rule); background:var(--card); position:relative; overflow:hidden}
+.gwrap .ghead{
+  display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+  padding:8px 12px; border-bottom:1px solid var(--rule); background:var(--paper-2);
+}
+.gwrap .ghead b{font-family:var(--disp); font-size:14px; letter-spacing:.05em; text-transform:uppercase}
+.gwrap .ghead em{font-family:var(--mono); font-size:10px; font-style:normal; color:var(--ink-3)}
+.gwrap svg{display:block; width:100%; height:auto; background:var(--card); cursor:grab; touch-action:none}
+.gwrap svg.drag{cursor:grabbing}
+.nlabel{font-family:var(--mono); font-size:9.5px; paint-order:stroke; stroke:var(--card); stroke-width:3px; stroke-linejoin:round}
+.nbox{stroke-width:1}
+.gwrap .zhint{position:absolute; right:8px; bottom:6px; font-family:var(--mono); font-size:9px; color:var(--ink-3)}
+
+/* ---------- matrix ---------- */
+table.mx{border-collapse:collapse; font-family:var(--mono); font-size:11px}
+table.mx th{padding:6px 8px; font-family:var(--disp); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2)}
+table.mx td{
+  padding:0; width:82px; height:52px; text-align:center; border:1px solid var(--card);
+  cursor:pointer; position:relative;
+}
+table.mx td .j{display:block; font-size:13px; font-weight:600; font-variant-numeric:tabular-nums}
+table.mx td .n{display:block; font-size:9.5px; opacity:.72}
+table.mx td.self{cursor:default}
+table.mx td.sel{outline:2px solid var(--oxblood); outline-offset:-2px}
+
+.bars{display:grid; gap:9px}
+.barrow{display:grid; grid-template-columns:74px 1fr 96px; gap:10px; align-items:center}
+.barrow .bn{font-family:var(--disp); font-size:13px; letter-spacing:.05em; text-transform:uppercase}
+.barrow .bt{display:flex; height:22px; border:1px solid var(--rule-2); background:var(--paper-2)}
+.barrow .bt i{display:block; height:100%}
+.barrow .bv{font-family:var(--mono); font-size:11px; color:var(--ink-2); text-align:right}
+.legend{display:flex; gap:16px; flex-wrap:wrap; font-family:var(--mono); font-size:10px; color:var(--ink-2); margin-top:10px}
+
+.oplist{display:grid; gap:0; border:1px solid var(--rule); background:var(--card)}
+.oprow{display:grid; grid-template-columns:150px 1fr; gap:14px; padding:11px 14px; border-bottom:1px solid var(--rule)}
+.oprow:last-child{border-bottom:0}
+.oprow .opk{font-family:var(--mono); font-size:10px; letter-spacing:.06em; text-transform:uppercase; color:var(--oxblood)}
+.oprow .opb{font-size:13.5px}
+.oprow .opb b{font-family:var(--mono); font-size:11.5px; font-weight:500; background:var(--paper-2); padding:1px 4px}
+.oprow .opn{color:var(--ink-2); font-style:italic; display:block; margin-top:3px; font-size:13px}
+
+dl.dossier{margin:0; display:grid; grid-template-columns:118px 1fr; gap:7px 14px}
+dl.dossier dt{font-family:var(--disp); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); padding-top:3px}
+dl.dossier dd{margin:0; font-size:14px}
+
+.callout{border-left:3px solid var(--oxblood); padding:2px 0 2px 15px; margin:18px 0; max-width:72ch}
+.callout p{margin:0 0 8px} .callout p:last-child{margin:0}
+.big{font-family:var(--mono); font-size:26px; font-weight:600; font-variant-numeric:tabular-nums; letter-spacing:-.02em}
+.big.red{color:var(--oxblood)}
+.kv{font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3)}
+.divergent{color:var(--oxblood)}
+.chips{display:flex; flex-wrap:wrap; gap:5px}
+.chips span{font-family:var(--mono); font-size:10.5px; border:1px solid var(--rule-2); padding:2px 7px; background:var(--paper-2)}
+
+@media (max-width:860px){
+  :root{--spine:0px}
+  #versionbar{flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch}
+  .vchip{flex:0 0 auto; min-width:118px; padding:9px 13px 10px}
+  .vchip .vn{font-size:15px}
+  #versionbar .vhint{display:none}
+  h3.sh span{float:none; display:block; margin-top:5px}
+  #masthead h1{font-size:30px}
+  table.mx td{width:64px; height:46px}
+  #spine{display:none}
+  #masthead{padding:16px 16px 0}
+  #versionbar{margin:0 -16px; padding:0 16px}
+  #planenav{padding:0 16px}
+  main{padding:20px 16px 70px}
+  .oprow{grid-template-columns:1fr; gap:4px}
+  dl.dossier{grid-template-columns:1fr; gap:2px 0}
+  dl.dossier dd{margin-bottom:8px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="spine" aria-hidden="true"><div class="brand">1890 · 1935</div></div>
+
+<div id="shell">
+  <header id="masthead">
+    <div class="kicker">A five-plane comparison instrument</div>
+    <h1>Five States of a Chart</h1>
+    <p class="sub">Alfred H. Barr, Jr. drew the diagram on the jacket of <em>Cubism and Abstract Art</em> (MoMA, 1936) at least five times. This tool holds all five states at once and asks what changed, where, and under what pressure.</p>
+    <nav id="versionbar" aria-label="Chart states"></nav>
+  </header>
+
+  <nav id="planenav" aria-label="Comparison planes">
+    <button class="pnav on" data-p="states"><b>—</b>States</button>
+    <button class="pnav" data-p="term"><b>I</b>Terminological</button>
+    <button class="pnav" data-p="conc"><b>II</b>Conceptual</button>
+    <button class="pnav" data-p="struct"><b>III</b>Structural</button>
+    <button class="pnav" data-p="genetic"><b>IV</b>Genetic</button>
+    <button class="pnav" data-p="prag"><b>V</b>Pragmatic</button>
+    <button class="pnav" data-p="method"><b>§</b>Method &amp; provenance</button>
+  </nav>
+
+  <main>
+    <section class="pane on" id="pane-states"></section>
+    <section class="pane" id="pane-term"></section>
+    <section class="pane" id="pane-conc"></section>
+    <section class="pane" id="pane-struct"></section>
+    <section class="pane" id="pane-genetic"></section>
+    <section class="pane" id="pane-prag"></section>
+    <section class="pane" id="pane-method"></section>
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   BARR FIVE-PLANE COMPARISON — DATASET
+   ------------------------------------------------------------
+   Reconstruction v0.1. See the Method & provenance panel.
+   Replace this object wholesale via "Load dataset" in the app.
+   ============================================================ */
+
+const CONCEPTS = {
+  /* --- non-modern sources (Barr's boxed inputs) --- */
+  japanese_prints:{l:"Japanese Prints",t:"source",y:1890},
+  near_eastern_art:{l:"Near-Eastern Art",t:"source",y:1900},
+  negro_sculpture:{l:"Negro Sculpture",t:"source",y:1906},
+  machine_esthetic:{l:"Machine Esthetic",t:"source",y:1909},
+
+  /* --- movements / classes of modern art --- */
+  decorative_tendency:{l:"\u201CDecorative tendency\u201D",t:"movement",y:1889},
+  structural_tendency:{l:"\u201CStructural tendency\u201D",t:"movement",y:1889},
+  synthetism:{l:"Synthetism",t:"movement",y:1888},
+  neo_impressionism:{l:"Neo-Impressionism",t:"movement",y:1886},
+  the_bridge:{l:"\u201CThe Bridge\u201D",t:"movement",y:1905},
+  the_blue_rider:{l:"\u201CThe Blue Rider\u201D",t:"movement",y:1911},
+  jack_of_diamonds:{l:"\u201CJack of Diamonds\u201D",t:"movement",y:1910},
+  fauvism:{l:"Fauvism",t:"movement",y:1905},
+  cubism:{l:"Cubism",t:"movement",y:1906},
+  expressionism_abstract:{l:"Expressionism (Abstract)",t:"movement",y:1911},
+  futurism:{l:"Futurism",t:"movement",y:1910},
+  orphism:{l:"Orphism",t:"movement",y:1912},
+  suprematism:{l:"Suprematism",t:"movement",y:1913},
+  constructivism:{l:"Constructivism",t:"movement",y:1914},
+  de_stijl:{l:"De Stijl and Neoplasticism",t:"movement",y:1916},
+  dadaism_abstract:{l:"Dadaism (Abstract)",t:"movement",y:1916},
+  purism:{l:"Purism",t:"movement",y:1918},
+  bauhaus:{l:"Bauhaus",t:"movement",y:1919},
+  modern_architecture:{l:"Modern Architecture",t:"movement",y:1922},
+  surrealism_abstract:{l:"Surrealism (Abstract)",t:"movement",y:1924},
+  geometrical_abstract_art:{l:"Geometrical Abstract Art",t:"movement",y:1935},
+  non_geometrical_abstract_art:{l:"Non-Geometrical Abstract Art",t:"movement",y:1935},
+
+  /* --- persons --- */
+  neo_impressionism_p:{l:"—",t:"person",y:1890},
+  van_gogh:{l:"Van Gogh",t:"person",y:1890},
+  gauguin:{l:"Gauguin",t:"person",y:1889},
+  bernard:{l:"Bernard",t:"person",y:1889},
+  denis:{l:"Denis",t:"person",y:1889},
+  cezanne:{l:"C\u00E9zanne",t:"person",y:1889},
+  seurat:{l:"Seurat",t:"person",y:1887},
+  signac:{l:"Signac",t:"person",y:1891},
+  redon:{l:"Redon",t:"person",y:1900},
+  rousseau:{l:"Rousseau",t:"person",y:1901},
+  degas:{l:"Degas",t:"person",y:1889},
+  matisse:{l:"Matisse",t:"person",y:1905},
+  derain:{l:"Derain",t:"person",y:1905},
+  picasso:{l:"Picasso",t:"person",y:1907},
+  braque:{l:"Braque",t:"person",y:1908},
+  gris:{l:"Gris",t:"person",y:1911},
+  leger:{l:"L\u00E9ger",t:"person",y:1912},
+  delaunay:{l:"Delaunay",t:"person",y:1912},
+  duchamp:{l:"Duchamp",t:"person",y:1913},
+  duchamp_villon:{l:"Duchamp-Villon",t:"person",y:1912},
+  archipenko:{l:"Archipenko",t:"person",y:1912},
+  gleizes:{l:"Gleizes",t:"person",y:1911},
+  villon:{l:"Villon",t:"person",y:1912},
+  lipchitz:{l:"Lipchitz",t:"person",y:1915},
+  brancusi:{l:"Brancusi",t:"person",y:1912},
+  kandinsky:{l:"Kandinsky",t:"person",y:1911},
+  klee:{l:"Klee",t:"person",y:1912},
+  marc:{l:"Marc",t:"person",y:1912},
+  feininger:{l:"Feininger",t:"person",y:1919},
+  boccioni:{l:"Boccioni",t:"person",y:1910},
+  carra:{l:"Carr\u00E0",t:"person",y:1910},
+  russolo:{l:"Russolo",t:"person",y:1910},
+  balla:{l:"Balla",t:"person",y:1910},
+  severini:{l:"Severini",t:"person",y:1910},
+  malevich:{l:"Malevich",t:"person",y:1913},
+  tatlin:{l:"Tatlin",t:"person",y:1914},
+  pevsner:{l:"Pevsner",t:"person",y:1917},
+  gabo:{l:"Gabo",t:"person",y:1917},
+  rodchenko:{l:"Rodchenko",t:"person",y:1918},
+  mondrian:{l:"Mondrian",t:"person",y:1917},
+  van_doesburg:{l:"Van Doesburg",t:"person",y:1917},
+  oud:{l:"Oud",t:"person",y:1917},
+  vantongerloo:{l:"Vantongerloo",t:"person",y:1918},
+  lissitzky:{l:"Lissitzky",t:"person",y:1919},
+  gropius:{l:"Gropius",t:"person",y:1919},
+  moholy_nagy:{l:"Moholy-Nagy",t:"person",y:1922},
+  albers:{l:"Albers",t:"person",y:1923},
+  schlemmer:{l:"Schlemmer",t:"person",y:1921},
+  le_corbusier:{l:"Le Corbusier",t:"person",y:1918},
+  ozenfant:{l:"Ozenfant",t:"person",y:1918},
+  arp:{l:"Arp",t:"person",y:1916},
+  ernst:{l:"Ernst",t:"person",y:1919},
+  picabia:{l:"Picabia",t:"person",y:1916},
+  man_ray:{l:"Man Ray",t:"person",y:1920},
+  schwitters:{l:"Schwitters",t:"person",y:1919},
+  hausmann:{l:"Hausmann",t:"person",y:1918},
+  miro:{l:"Mir\u00F3",t:"person",y:1924},
+  masson:{l:"Masson",t:"person",y:1924},
+  kupka:{l:"Kupka",t:"person",y:1912},
+  kiesler:{l:"Kiesler",t:"person",y:1925},
+
+  /* --- places --- */
+  paris:{l:"Paris",t:"place",y:1890},
+  pont_aven:{l:"Pont-Aven",t:"place",y:1888},
+  provence:{l:"Provence",t:"place",y:1906},
+  milan:{l:"Milan",t:"place",y:1910},
+  munich:{l:"Munich",t:"place",y:1911},
+  moscow:{l:"Moscow",t:"place",y:1913},
+  dresden:{l:"Dresden",t:"place",y:1905},
+  russia:{l:"Russia",t:"place",y:1910},
+  zurich:{l:"Zurich",t:"place",y:1916},
+  cologne:{l:"Cologne",t:"place",y:1918},
+  berlin:{l:"Berlin",t:"place",y:1918},
+  hanover:{l:"Hanover",t:"place",y:1919},
+  leyden:{l:"Leyden",t:"place",y:1917},
+  holland:{l:"Holland",t:"place",y:1917},
+  germany:{l:"Germany",t:"place",y:1919},
+  weimar:{l:"Weimar",t:"place",y:1919},
+  dessau:{l:"Dessau",t:"place",y:1925},
+  barcelona:{l:"Barcelona",t:"place",y:1935}
+};
+
+/* Membership: movement -> persons attributed to it, per version.
+   Expanded into edges at load time. */
+const MEMBERS = {
+  synthetism:["bernard","denis"],
+  neo_impressionism:["signac"],
+  fauvism:["matisse","derain"],
+  cubism:["picasso","braque","gris","leger","archipenko","duchamp_villon","gleizes","villon","lipchitz"],
+  expressionism_abstract:["kandinsky","klee","marc","feininger"],
+  futurism:["boccioni","carra","russolo","balla","severini"],
+  orphism:["delaunay","kupka"],
+  suprematism:["malevich"],
+  constructivism:["tatlin","pevsner","gabo","rodchenko","lissitzky"],
+  de_stijl:["mondrian","van_doesburg","oud","vantongerloo"],
+  purism:["le_corbusier","ozenfant"],
+  bauhaus:["gropius","moholy_nagy","albers","schlemmer"],
+  dadaism_abstract:["arp","duchamp","picabia","ernst","man_ray","schwitters","hausmann"],
+  surrealism_abstract:["miro","masson","ernst","arp","picasso","man_ray"],
+  the_blue_rider:["kandinsky","klee","marc"]
+};
+
+/* Skeleton of influence relations shared by the developed charts. */
+const SKELETON = [
+  ["japanese_prints","van_gogh"],["japanese_prints","synthetism"],["japanese_prints","fauvism"],
+  ["synthetism","fauvism"],["van_gogh","fauvism"],
+  ["cezanne","fauvism"],["cezanne","cubism"],
+  ["seurat","neo_impressionism"],["gauguin","synthetism"],["neo_impressionism","fauvism"],["neo_impressionism","cubism"],
+  ["near_eastern_art","fauvism"],
+  ["negro_sculpture","fauvism"],["negro_sculpture","cubism"],
+  ["rousseau","cubism"],
+  ["fauvism","expressionism_abstract"],
+  ["cubism","futurism"],["cubism","orphism"],["cubism","suprematism"],
+  ["cubism","constructivism"],["cubism","de_stijl"],["cubism","purism"],
+  ["cubism","dadaism_abstract"],
+  ["machine_esthetic","futurism"],["machine_esthetic","constructivism"],
+  ["machine_esthetic","de_stijl"],["machine_esthetic","purism"],["machine_esthetic","bauhaus"],
+  ["futurism","constructivism"],["futurism","dadaism_abstract"],
+  ["suprematism","constructivism"],["suprematism","de_stijl"],
+  ["constructivism","bauhaus"],["de_stijl","bauhaus"],
+  ["expressionism_abstract","dadaism_abstract"],
+  ["dadaism_abstract","surrealism_abstract"],
+  ["expressionism_abstract","non_geometrical_abstract_art"],
+  ["surrealism_abstract","non_geometrical_abstract_art"],
+  ["constructivism","geometrical_abstract_art"],["de_stijl","geometrical_abstract_art"],
+  ["purism","geometrical_abstract_art"],["bauhaus","geometrical_abstract_art"],
+  ["suprematism","geometrical_abstract_art"]
+];
+
+/* Place attributions: concept -> places, per version (filtered to nodes present). */
+const SITED = {
+  synthetism:["pont_aven","paris"], neo_impressionism:["paris"], cezanne:["provence"],
+  fauvism:["paris"], cubism:["paris"], expressionism_abstract:["munich"],
+  futurism:["milan"], orphism:["paris"], suprematism:["moscow"],
+  constructivism:["moscow","berlin"], de_stijl:["leyden","holland","germany"],
+  purism:["paris"], bauhaus:["weimar","dessau"],
+  dadaism_abstract:["zurich","paris","cologne","berlin","hanover"],
+  surrealism_abstract:["paris"], rousseau:["paris"], brancusi:["paris"], redon:["paris"],
+  the_bridge:["dresden"], the_blue_rider:["munich"], jack_of_diamonds:["russia"],
+  non_geometrical_abstract_art:["barcelona"]
+};
+
+const VERSIONS = [
+  {
+    id:"p15", name:"p15", order:1, explicitOnly:true,
+    subtitle:"Preliminary sketch",
+    date:"c. 1935",
+    facsimile:"", /* drop in a local image path, e.g. "img/p15.jpg" */
+    pragmatic:{
+      support:"Graphite on a single sheet; no ruled frame, year marks scrawled at left.",
+      audience:"Barr alone. No sign the sheet was meant to be seen.",
+      permanence:"Ephemeral working paper; survives by accident of filing.",
+      constraint:"None beyond the width of the page. Space runs out at the right edge.",
+      fn:"Thinking. Barr sorts artists into loose national and personal clusters and names two 'tendencies' rather than movements."
+    },
+    labels:{
+      fauvism:"the \u201CFauves\u201D", cubism:"the Cubists", futurism:"the Futurists",
+      negro_sculpture:"Negro art", suprematism:"Suprematism",
+      decorative_tendency:"\u201CDecorative tendency toward abstract design\u2026\u201D",
+      structural_tendency:"\u201CStructural tendency toward abstract design\u2026\u201D"
+    },
+    nodes:["japanese_prints","decorative_tendency","structural_tendency","degas","gauguin",
+      "van_gogh","cezanne","seurat","negro_sculpture","russia","jack_of_diamonds","dresden",
+      "the_bridge","munich","the_blue_rider","kandinsky","klee","marc","matisse","fauvism",
+      "derain","paris","cubism","picasso","braque","gris","delaunay","leger","duchamp",
+      "milan","futurism","boccioni","carra","russolo","balla","severini","suprematism"],
+    edges:[
+      ["japanese_prints","decorative_tendency"],
+      ["decorative_tendency","degas"],["decorative_tendency","gauguin"],["decorative_tendency","van_gogh"],
+      ["decorative_tendency","jack_of_diamonds","w"],["decorative_tendency","the_bridge"],
+      ["decorative_tendency","fauvism"],
+      ["structural_tendency","cezanne"],["structural_tendency","seurat"],
+      ["structural_tendency","cubism","w"],["cezanne","cubism"],
+      ["negro_sculpture","cubism"],
+      ["jack_of_diamonds","russia"],["the_bridge","dresden"],["the_blue_rider","munich"],
+      ["the_bridge","the_blue_rider","w"],["fauvism","matisse"],["fauvism","derain"],["fauvism","paris"],
+      ["fauvism","the_blue_rider","w"],["the_blue_rider","kandinsky"],["the_blue_rider","klee"],
+      ["the_blue_rider","marc"],["fauvism","cubism","w"],["cubism","paris"],
+      ["cubism","picasso"],["cubism","braque"],["cubism","gris"],["cubism","delaunay"],
+      ["cubism","leger"],["cubism","duchamp"],["cubism","futurism","w"],
+      ["cubism","kandinsky","w"],["cubism","marc","w"],
+      ["futurism","milan"],["futurism","boccioni"],["futurism","carra"],["futurism","russolo"],
+      ["futurism","balla"],["futurism","severini"],["futurism","duchamp","w"],
+      ["cubism","suprematism","w"]
+    ]
+  },
+  {
+    id:"insert", name:"Insert", order:2,
+    subtitle:"Catalogue insert",
+    date:"1936",
+    facsimile:"",
+    pragmatic:{
+      support:"Fold-out sheet, bound into the catalogue but opening beyond its trim.",
+      audience:"Reader of the catalogue, at a desk, with time.",
+      permanence:"Printed and issued, but subordinate to the book \u2014 a supplement.",
+      constraint:"The fold buys area. Density is affordable here and nowhere else.",
+      fn:"Documenting. Every movement is loaded with its personnel; the chart works as a register."
+    },
+    labels:{expressionism_abstract:"Abstract Expressionism", dadaism_abstract:"(Abstract) Dadaism",
+      surrealism_abstract:"(Abstract) Surrealism"},
+    nodes:["japanese_prints","near_eastern_art","negro_sculpture","machine_esthetic",
+      "synthetism","neo_impressionism","fauvism","cubism","expressionism_abstract","futurism",
+      "orphism","suprematism","constructivism","de_stijl","dadaism_abstract","purism","bauhaus",
+      "surrealism_abstract","geometrical_abstract_art","non_geometrical_abstract_art",
+      "paris","munich","milan","moscow","holland","weimar","dessau","zurich","cologne","berlin","hanover",
+      "van_gogh","gauguin","bernard","denis","cezanne","seurat","signac","redon","rousseau",
+      "matisse","derain","picasso","braque","gris","leger","delaunay","duchamp","archipenko",
+      "duchamp_villon","gleizes","lipchitz","brancusi","kandinsky","klee","marc","feininger",
+      "boccioni","carra","russolo","balla","severini","malevich","tatlin","pevsner","gabo",
+      "rodchenko","mondrian","van_doesburg","oud","vantongerloo","lissitzky","gropius",
+      "moholy_nagy","le_corbusier","ozenfant","arp","ernst","picabia","man_ray","miro","kupka"],
+    edges:[["redon","dadaism_abstract","w"],["redon","surrealism_abstract","w"],
+      ["brancusi","constructivism"],["brancusi","non_geometrical_abstract_art"],
+      ["expressionism_abstract","surrealism_abstract","w"]]
+  },
+  {
+    id:"p19", name:"p19", order:3,
+    subtitle:"Chart draft",
+    date:"1936",
+    facsimile:"",
+    pragmatic:{
+      support:"Ink and graphite on a ruled sheet; year axis drawn on both margins.",
+      audience:"The printer, and Barr checking the printer.",
+      permanence:"Intermediate. Made to be superseded by a plate.",
+      constraint:"One page, one opening. The frame is now fixed before the content is.",
+      fn:"Schematising. Persons drop away; the chart becomes a diagram of movements and cities."
+    },
+    labels:{expressionism_abstract:"ABSTRACT EXPRESSIONISM", dadaism_abstract:"(ABSTRACT) DADAISM",
+      surrealism_abstract:"(ABSTRACT) SURREALISM",
+      geometrical_abstract_art:"CONTEMPORARY GEOMETRICAL ABSTRACT ART",
+      non_geometrical_abstract_art:"CONTEMPORARY NON-GEOMETRICAL ABSTRACT ART"},
+    nodes:["japanese_prints","near_eastern_art","negro_sculpture","machine_esthetic",
+      "synthetism","neo_impressionism","fauvism","cubism","expressionism_abstract","futurism",
+      "orphism","suprematism","constructivism","de_stijl","dadaism_abstract","purism","bauhaus",
+      "surrealism_abstract","geometrical_abstract_art","non_geometrical_abstract_art",
+      "gauguin","van_gogh","cezanne","seurat","rousseau",
+      "paris","munich","milan","moscow","holland","germany","weimar","dessau","zurich","cologne","berlin"],
+    edges:[]
+  },
+  {
+    id:"p21", name:"p21", order:4,
+    subtitle:"Annotated chart",
+    date:"1936",
+    facsimile:"",
+    pragmatic:{
+      support:"A p19-type sheet overwritten in a second, smaller hand; names crowd into the ovals.",
+      audience:"Barr again, verifying the schema against the checklist.",
+      permanence:"Working. The annotation damages the legibility of the thing annotated.",
+      constraint:"Annotation over an existing structure \u2014 no room to redraw, only to overwrite.",
+      fn:"Loading. Barr tests whether the movement categories can carry their evidence."
+    },
+    labels:{expressionism_abstract:"ABSTRACT EXPRESSIONISM", dadaism_abstract:"ABSTRACT DADAISM",
+      surrealism_abstract:"ABSTRACT SURREALISM"},
+    nodes:["japanese_prints","near_eastern_art","negro_sculpture","machine_esthetic",
+      "synthetism","neo_impressionism","fauvism","cubism","expressionism_abstract","futurism",
+      "orphism","suprematism","constructivism","de_stijl","dadaism_abstract","purism","bauhaus",
+      "surrealism_abstract","geometrical_abstract_art","non_geometrical_abstract_art",
+      "paris","munich","milan","moscow","holland","weimar","dessau","zurich","berlin","barcelona",
+      "van_gogh","gauguin","cezanne","seurat","rousseau","matisse","derain","picasso","braque",
+      "gris","leger","delaunay","duchamp","archipenko","brancusi","kandinsky","klee","marc",
+      "boccioni","carra","russolo","balla","severini","malevich","tatlin","pevsner","gabo",
+      "mondrian","van_doesburg","lissitzky","gropius","moholy_nagy","le_corbusier","ozenfant",
+      "arp","ernst","picabia","man_ray","miro"],
+    edges:[["brancusi","constructivism"],["brancusi","expressionism_abstract","w"],
+      ["expressionism_abstract","surrealism_abstract","w"]]
+  },
+  {
+    id:"cover", name:"Cover", order:5,
+    subtitle:"Dust jacket, published",
+    date:"1936",
+    facsimile:"",
+    pragmatic:{
+      support:"Two-colour offset on a printed dust jacket. Black linework, oxblood overprint.",
+      audience:"A stranger in a bookshop, at arm's length, for a few seconds.",
+      permanence:"Fixed and mass-reproduced. This is the version that enters circulation.",
+      constraint:"Legibility at distance, two inks, and a title band eating the lower third.",
+      fn:"Declaring. The chart argues a thesis about modern art rather than recording one."
+    },
+    labels:{expressionism_abstract:"[ABSTRACT] EXPRESSIONISM", dadaism_abstract:"[ABSTRACT] DADAISM",
+      surrealism_abstract:"[ABSTRACT] SURREALISM",
+      geometrical_abstract_art:"GEOMETRICAL ABSTRACT ART",
+      non_geometrical_abstract_art:"NON-GEOMETRICAL ABSTRACT ART"},
+    nodes:["japanese_prints","near_eastern_art","negro_sculpture","machine_esthetic",
+      "synthetism","neo_impressionism","fauvism","cubism","expressionism_abstract","futurism",
+      "orphism","suprematism","constructivism","de_stijl","dadaism_abstract","purism","bauhaus",
+      "modern_architecture","surrealism_abstract","geometrical_abstract_art","non_geometrical_abstract_art",
+      "gauguin","cezanne","seurat","van_gogh","redon","rousseau","brancusi",
+      "paris","munich","milan","moscow","weimar","dessau","zurich","cologne","berlin","leyden",
+      "pont_aven","provence"],
+    edges:[["machine_esthetic","modern_architecture"],["machine_esthetic","orphism"],
+      ["machine_esthetic","suprematism"],
+      ["de_stijl","modern_architecture"],["purism","modern_architecture"],
+      ["bauhaus","modern_architecture"],["modern_architecture","geometrical_abstract_art"],
+      ["cubism","orphism"],["orphism","suprematism","w"],
+      ["redon","dadaism_abstract","w"],["redon","surrealism_abstract","w"],
+      ["near_eastern_art","expressionism_abstract","w"],["redon","expressionism_abstract","w"],
+      ["brancusi","constructivism"],["brancusi","non_geometrical_abstract_art"]]
+  }
+];
+
+/* Figures as printed in Leazer, NASKO 2025 — held for comparison against
+   what this dataset computes. Divergence is a finding, not a bug. */
+const PUBLISHED = {
+  counts:{p15:35, insert:82, p19:34, p21:69, cover:30},
+  categories:{
+    cover:{place:2, movement:17, source:4, person:7},
+    p15:{place:5, movement:7, source:3, person:20},
+    insert:{place:11, movement:11, source:3, person:57},
+    p19:{place:11, movement:16, source:3, person:4},
+    p21:{place:10, movement:13, source:4, person:42}
+  },
+  jaccard:{
+    "cover|p15":[0.121,7], "cover|insert":[0.191,18], "cover|p19":[0.561,23], "cover|p21":[0.286,22],
+    "p15|insert":[0.272,25], "p15|p19":[0.150,9], "p15|p21":[0.333,26],
+    "insert|p19":[0.275,25], "insert|p21":[0.480,49], "p19|p21":[0.304,24]
+  },
+  consensus:[
+    ["Futurism","Milan",5],["Fauvism","Paris",5],["Cubism","Paris",5],
+    ["Fauvism","Expressionism (Abstract)",4],["Neo-Impressionism","Paris",4],
+    ["Neo-Impressionism","Fauvism",4],["Surrealism (Abstract)","Paris",4],
+    ["Surrealism (Abstract)","Non-Geometrical Abstract Art",4],
+    ["Cubism","Constructivism",4],["Purism","Paris",4]
+  ],
+  pagerank:{
+    cover:[["Paris",11,0,0.10398],["Fauvism",7,2,0.05906],["Non-Geometrical Abstract Art",3,0,0.05064],
+      ["Expressionism (Abstract)",3,3,0.04915],["Geometrical Abstract Art",5,0,0.04377],
+      ["Modern Architecture",4,0,0.03400],["Bauhaus",4,3,0.02984],["Cubism",4,8,0.02968],
+      ["Dadaism (Abstract)",3,5,0.02846],["Munich",1,0,0.02801]],
+    p15:[["Kandinsky",3,0,0.07029],["Russia",2,0,0.05183],["Duchamp",3,0,0.04857],
+      ["Dresden",1,0,0.04636],["Picasso",2,2,0.04337],["Paris",2,0,0.04173],
+      ["Futurism",1,7,0.03966],["\u201CDecorative tendency\u201D",1,4,0.03927],
+      ["Cubism",2,8,0.03859],["Fauvism",2,2,0.03859]]
+  }
+};
+
+/* Operations the grammar cannot infer from node/edge sets alone.
+   Hand-coded from the facsimiles; each carries its warrant. */
+const NOTED_OPS = {
+  "p15>insert":[
+    {op:"relabel", a:"the \u201CFauves\u201D", b:"FAUVISM",
+     note:"A group of painters becomes an -ism. The same for the Cubists and the Futurists."},
+    {op:"merge", a:"\u201CThe Bridge\u201D, \u201CThe Blue Rider\u201D, \u201CJack of Diamonds\u201D",
+     b:"Abstract Expressionism",
+     note:"Three named groups \u2014 Dresden, Munich, Moscow \u2014 collapse into one category sited at Munich."},
+    {op:"exogenize", a:"Negro art", b:"Negro Sculpture (boxed)",
+     note:"Relabelled and moved into a bordered box feeding the tree from outside it. Non-European sources become inputs, never members."},
+    {op:"split", a:"\u201CDecorative\u201D / \u201CStructural tendency\u201D",
+     b:"Synthetism, Neo-Impressionism, Japanese Prints, Near-Eastern Art",
+     note:"Two descriptive tendencies are replaced by named entities. The chart stops describing and starts naming."}
+  ],
+  "insert>p19":[
+    {op:"granularity-collapse", a:"51 personal names", b:"\u2014",
+     note:"The movement skeleton is retained intact while its personnel are stripped out."}
+  ],
+  "p19>p21":[
+    {op:"granularity-restore", a:"\u2014", b:"39 personal names",
+     note:"Names return, written over a structure that was drawn without room for them."}
+  ],
+  "p21>cover":[
+    {op:"hedge", a:"ABSTRACT DADAISM", b:"[ABSTRACT] DADAISM",
+     note:"Square brackets appear on Expressionism, Dadaism and Surrealism. The qualifier is marked as Barr's, not the movement's."},
+    {op:"insert", a:"\u2014", b:"Modern Architecture",
+     note:"The only concept unique to the published state, and the only one with no source in any draft."},
+    {op:"granularity-collapse", a:"39 personal names", b:"7",
+     note:"Only precursors survive as persons. Everyone working after 1910 is absorbed into a movement."}
+  ]
+};
+
+/* ============================================================
+   ENGINE — model construction, metrics, layout
+   ============================================================ */
+
+const TYPE_ORDER = ["movement","source","person","place"];
+const TYPE_LABEL = {movement:"Modern art", source:"Non-modern source", person:"Personal name", place:"Geographic name"};
+const TYPE_COLOR = {movement:"#2A2C27", source:"#8C2F22", person:"#31506E", place:"#4A6B54"};
+
+let MODEL = null;
+
+function buildModel(concepts, versions, members, skeleton, sited){
+  const vs = versions.map(v=>{
+    const set = new Set(v.nodes);
+    const seen = new Map();
+    const push = (s,t,weak)=>{
+      if(!set.has(s)||!set.has(t)||s===t) return;
+      const k = s+">"+t;
+      if(seen.has(k)){ if(!weak) seen.get(k)[2]=false; return; }
+      seen.set(k,[s,t,!!weak]);
+    };
+    if(!v.explicitOnly){
+      skeleton.forEach(([s,t])=>push(s,t,false));
+      Object.entries(members).forEach(([m,ps])=>ps.forEach(p=>push(m,p,false)));
+      Object.entries(sited).forEach(([c,ps])=>ps.forEach(p=>push(c,p,false)));
+    }
+    (v.edges||[]).forEach(e=>push(e[0],e[1],e[2]==="w"));
+    const {edges, cut} = acyclic([...seen.values()]);
+    return Object.assign({}, v, {set, nodes:v.nodes.slice(), edges, backEdges:cut});
+  }).sort((a,b)=>a.order-b.order);
+
+  vs.forEach(v=>{ v.metrics = graphMetrics(v, concepts); });
+
+  const allIds = new Set();
+  vs.forEach(v=>v.nodes.forEach(n=>allIds.add(n)));
+  const all = [...allIds].filter(id=>concepts[id]).sort((a,b)=>
+    concepts[a].l.localeCompare(concepts[b].l));
+
+  return {versions:vs, order:vs.map(v=>v.id), all, concepts};
+}
+
+/* Remove back-edges so every state is a DAG. Reports what it cut, because a
+   back-edge means the coding contradicts itself and the analyst should know. */
+function acyclic(edges){
+  const kids={}; edges.forEach(([s,t])=>{(kids[s]=kids[s]||[]).push(t);});
+  const state={}, cut=[];
+  const keep=new Set(edges.map(e=>e[0]+">"+e[1]));
+  const visit=x=>{
+    state[x]=1;
+    (kids[x]||[]).forEach(y=>{
+      if(!keep.has(x+">"+y)) return;
+      if(state[y]===1){ keep.delete(x+">"+y); cut.push([x,y]); return; }
+      if(!state[y]) visit(y);
+    });
+    state[x]=2;
+  };
+  Object.keys(kids).forEach(x=>{ if(!state[x]) visit(x); });
+  return {edges: edges.filter(e=>keep.has(e[0]+">"+e[1])), cut};
+}
+
+function graphMetrics(v, C){
+  const inD={}, outD={}, kids={}, par={};
+  v.nodes.forEach(n=>{inD[n]=0;outD[n]=0;kids[n]=[];par[n]=[]});
+  v.edges.forEach(([s,t])=>{ outD[s]++; inD[t]++; kids[s].push(t); par[t].push(s); });
+  const n=v.nodes.length, m=v.edges.length;
+  const roots=v.nodes.filter(x=>inD[x]===0), sinks=v.nodes.filter(x=>outD[x]===0);
+  const pr = pagerank(v.nodes, kids);
+  const cats={}; TYPE_ORDER.forEach(t=>cats[t]=0);
+  v.nodes.forEach(x=>{ const t=C[x]&&C[x].t; if(t&&cats[t]!==undefined) cats[t]++; });
+  return {inD,outD,kids,par,n,m,roots,sinks,pr,cats,
+    density: n>1 ? m/(n*(n-1)) : 0,
+    depth: longestPath(v.nodes,kids),
+    comm: communities(v.nodes, v.edges)};
+}
+
+function pagerank(nodes, kids, d=0.85, iters=80){
+  const n=nodes.length; if(!n) return {};
+  let r={}; nodes.forEach(x=>r[x]=1/n);
+  for(let i=0;i<iters;i++){
+    const nx={}; let dangling=0;
+    nodes.forEach(x=>{ nx[x]=(1-d)/n; if(!kids[x].length) dangling+=r[x]; });
+    nodes.forEach(x=>{ const k=kids[x]; if(k.length){ const share=d*r[x]/k.length;
+      k.forEach(y=>{ if(nx[y]!==undefined) nx[y]+=share; }); } });
+    const spread=d*dangling/n; nodes.forEach(x=>nx[x]+=spread);
+    r=nx;
+  }
+  return r;
+}
+
+function longestPath(nodes, kids){
+  const memo={}, mark={};
+  const go=x=>{
+    if(memo[x]!==undefined) return memo[x];
+    if(mark[x]) return 0; mark[x]=1;
+    let best=0; (kids[x]||[]).forEach(y=>best=Math.max(best,1+go(y)));
+    mark[x]=0; return memo[x]=best;
+  };
+  return nodes.reduce((a,x)=>Math.max(a,go(x)),0);
+}
+
+/* label propagation on the undirected projection */
+function communities(nodes, edges){
+  const nb={}; nodes.forEach(x=>nb[x]=[]);
+  edges.forEach(([s,t])=>{ nb[s].push(t); nb[t].push(s); });
+  const lab={}; nodes.forEach((x,i)=>lab[x]=i);
+  const ord=nodes.slice();
+  for(let it=0; it<24; it++){
+    let moved=false;
+    for(let i=ord.length-1;i>0;i--){const j=(i*7+it*13)%(i+1);[ord[i],ord[j]]=[ord[j],ord[i]];}
+    ord.forEach(x=>{
+      const c={}; nb[x].forEach(y=>c[lab[y]]=(c[lab[y]]||0)+1);
+      let best=lab[x], bv=-1;
+      Object.entries(c).forEach(([k,val])=>{ if(val>bv||(val===bv&&+k<best)){bv=val;best=+k;} });
+      if(best!==lab[x]){ lab[x]=best; moved=true; }
+    });
+    if(!moved) break;
+  }
+  const groups={}; nodes.forEach(x=>{ (groups[lab[x]]=groups[lab[x]]||[]).push(x); });
+  return Object.values(groups).filter(g=>g.length>1).sort((a,b)=>b.length-a.length);
+}
+
+/* ---------- set comparison ---------- */
+function jaccard(a,b){
+  let inter=0; a.forEach(x=>{ if(b.has(x)) inter++; });
+  const uni=a.size+b.size-inter;
+  return {j: uni? inter/uni : 0, inter, uni};
+}
+function edgeKeys(v){ return new Set(v.edges.map(e=>e[0]+">"+e[1])); }
+
+/* consensus over all versions: edge key -> count */
+function consensusEdges(versions){
+  const c={};
+  versions.forEach(v=>edgeKeys(v).forEach(k=>c[k]=(c[k]||0)+1));
+  return c;
+}
+
+/* ---------- edit grammar between two states ---------- */
+function codeEdits(a, b, C){
+  const A=a.set, B=b.set;
+  const ins=b.nodes.filter(x=>!A.has(x));
+  const del=a.nodes.filter(x=>!B.has(x));
+  const kept=a.nodes.filter(x=>B.has(x));
+  const relabel=kept.filter(x=>surface(a,x,C)!==surface(b,x,C))
+    .map(x=>({id:x, from:surface(a,x,C), to:surface(b,x,C)}));
+  const ea=edgeKeys(a), eb=edgeKeys(b);
+  const survive=k=>{const[s,t]=k.split(">");return A.has(s)&&A.has(t)&&B.has(s)&&B.has(t);};
+  const wireAdd=[...eb].filter(k=>!ea.has(k)&&survive(k));
+  const wireCut=[...ea].filter(k=>!eb.has(k)&&survive(k));
+  const collapsed=del.filter(x=>C[x].t==="person");
+  const restored=ins.filter(x=>C[x].t==="person");
+  const hedged=relabel.filter(r=>/[[("\u201C]/.test(r.to)&&!/[[("\u201C]/.test(r.from));
+  const dehedged=relabel.filter(r=>/[[("\u201C]/.test(r.from)&&!/[[("\u201C]/.test(r.to));
+  const rank=v=>{const e=Object.entries(v.metrics.pr).sort((x,y)=>y[1]-x[1]);
+    const m={}; e.forEach(([k],i)=>m[k]=i+1); return m;};
+  const ra=rank(a), rb=rank(b);
+  const shifts=kept.map(x=>({id:x, from:ra[x], to:rb[x], d:ra[x]-rb[x]}))
+    .filter(s=>Math.abs(s.d)>=Math.max(4, Math.round(kept.length*0.12)))
+    .sort((p,q)=>Math.abs(q.d)-Math.abs(p.d));
+  return {ins, del, kept, relabel, wireAdd, wireCut, collapsed, restored, hedged, dehedged,
+    promoted:shifts.filter(s=>s.d>0), demoted:shifts.filter(s=>s.d<0)};
+}
+function surface(v, id, C){ return (v.labels&&v.labels[id]) || C[id].l; }
+
+/* ---------- layered layout (year banded on the vertical, barycentre on the horizontal,
+   then relaxed so every arc points strictly downward) ---------- */
+function layout(v, C, opts){
+  opts = opts||{};
+  const rowH = opts.rowH||46, nodeH = 17, gap = 12, band = opts.band||4;
+  let nodes = v.nodes.slice();
+  if(opts.filter) nodes = nodes.filter(opts.filter);
+  const nset = new Set(nodes);
+  const edges = v.edges.filter(([s,t])=>nset.has(s)&&nset.has(t));
+  if(!nodes.length) return {nodes:[],edges:[],width:320,height:120,rowH};
+
+  const minY = Math.min(...nodes.map(x=>C[x].y));
+  const rk = {}; nodes.forEach(x=>rk[x]=Math.floor((C[x].y-minY)/band));
+
+  const kids={}, par={}, indeg={};
+  nodes.forEach(x=>{kids[x]=[];par[x]=[];indeg[x]=0;});
+  edges.forEach(([s,t])=>{kids[s].push(t);par[t].push(s);indeg[t]++;});
+
+  const q=nodes.filter(x=>!indeg[x]); const done=new Set(); let guard=nodes.length*4;
+  while(q.length && guard-->0){
+    const x=q.shift(); if(done.has(x)) continue; done.add(x);
+    kids[x].forEach(y=>{ if(rk[y]<=rk[x]) rk[y]=rk[x]+1; if(--indeg[y]<=0) q.push(y); });
+  }
+  const used=[...new Set(nodes.map(x=>rk[x]))].sort((a,b)=>a-b);
+  const cmap={}; used.forEach((r,i)=>cmap[r]=i);
+  nodes.forEach(x=>rk[x]=cmap[rk[x]]);
+
+  const rows=used.map(()=>[]);
+  nodes.forEach(x=>rows[rk[x]].push(x));
+
+  const W={}, pos={};
+  nodes.forEach(x=>{ W[x]=Math.max(30, surface(v,x,C).length*5.3+12); });
+  rows.forEach(r=>{
+    r.sort((a,b)=>TYPE_ORDER.indexOf(C[a].t)-TYPE_ORDER.indexOf(C[b].t)||a.localeCompare(b));
+    r.forEach((x,i)=>pos[x]=i);
+  });
+
+  for(let sweep=0; sweep<24; sweep++){
+    const down = sweep%2===0;
+    const seq = down ? rows : rows.slice().reverse();
+    seq.forEach(r=>{
+      const bc = r.map(x=>{
+        const rel = down?par[x]:kids[x];
+        const vals = rel.map(y=>pos[y]).filter(z=>z!==undefined);
+        return {x, b: vals.length? vals.reduce((a,c)=>a+c,0)/vals.length : pos[x]};
+      });
+      bc.sort((a,b)=>a.b-b.b);
+      bc.forEach((o,i)=>pos[o.x]=i);
+      r.sort((a,b)=>pos[a]-pos[b]);
+    });
+  }
+
+  let maxW=0; const place={};
+  rows.forEach((r,ri)=>{
+    let x=0;
+    r.forEach(id=>{ place[id]={x:x+W[id]/2, y:ri*rowH+rowH/2, w:W[id], h:nodeH}; x+=W[id]+gap; });
+    maxW=Math.max(maxW, x-gap);
+  });
+  const height = rows.length*rowH+26;
+  const sx = Math.max(1, Math.min(2.6, (height*1.5)/Math.max(maxW,1)));
+  rows.forEach(r=>{
+    const rowW=r.reduce((a,id)=>a+W[id]+gap,0)-gap;
+    const off=(maxW-rowW)/2;
+    r.forEach(id=>place[id].x=(place[id].x+off)*sx);
+  });
+  maxW*=sx;
+
+  return {
+    nodes: nodes.map(id=>Object.assign({id, label:surface(v,id,C), type:C[id].t, year:C[id].y}, place[id])),
+    edges: edges.map(([s,t,w])=>({s,t,w, a:place[s], b:place[t]})),
+    width: Math.max(320,maxW)+44, height, rows:rows.length, rowH
+  };
+}
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+const $ = s=>document.querySelector(s);
+const $$ = s=>[...document.querySelectorAll(s)];
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const f3 = n=>n.toFixed(3), f2 = n=>n.toFixed(2);
+
+const state = {plane:"states", sel:new Set(), focus:null, thresh:3,
+  gfilter:"all", showPublished:true, mxSel:null, editPair:0};
+
+/* ---------- shared fragments ---------- */
+function strip(id, small){
+  const cells = MODEL.versions.map((v,i)=>{
+    const on = v.set.has(id);
+    return `<i class="${on?"p":""}${on&&i===MODEL.versions.length-1?" last":""}" title="${esc(v.name)}"></i>`;
+  }).join("");
+  return `<span class="strip${small?" sm":""}" role="img" aria-label="present in ${MODEL.versions.filter(v=>v.set.has(id)).map(v=>v.name).join(", ")||"none"}">${cells}</span>`;
+}
+function typePill(t){ return `<span class="pill t-${t}">${t}</span>`; }
+function dot(t){ return `<span class="dot" style="background:${TYPE_COLOR[t]}"></span>`; }
+function sel(){ return MODEL.versions.filter(v=>state.sel.has(v.id)); }
+function label(v,id){ return surface(v,id,MODEL.concepts); }
+
+/* ============================================================
+   VERSION BAR + SPINE
+   ============================================================ */
+function renderSpine(){
+  const sp=$("#spine"); const h=window.innerHeight;
+  [...sp.querySelectorAll(".yr")].forEach(n=>n.remove());
+  for(let y=1890;y<=1935;y+=5){
+    const d=document.createElement("div");
+    d.className="yr"+(y%10===0?" maj":"");
+    d.style.top=(((y-1888)/(1937-1888))*(h-60)+28)+"px";
+    d.textContent=y; sp.appendChild(d);
+  }
+}
+function renderVersionBar(){
+  const bar=$("#versionbar");
+  bar.innerHTML = MODEL.versions.map(v=>`
+    <button class="vchip ${state.sel.has(v.id)?"on":""}" data-v="${v.id}" aria-pressed="${state.sel.has(v.id)}">
+      <span class="vn">${esc(v.name)}</span>
+      <span class="vs">${esc(v.subtitle)}</span>
+      <span class="vc">${v.metrics.n} concepts · ${v.metrics.m} relations</span>
+    </button>`).join("")
+    + `<span class="vhint">click to include / exclude from every plane</span>`;
+  bar.querySelectorAll(".vchip").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.v;
+    if(state.sel.has(id)){ if(state.sel.size>1) state.sel.delete(id); }
+    else state.sel.add(id);
+    renderVersionBar(); render();
+  });
+}
+
+/* ============================================================
+   PANE — STATES
+   ============================================================ */
+function paneStates(){
+  const cards = MODEL.versions.map(v=>{
+    const p=v.pragmatic, mt=v.metrics;
+    const fac = v.facsimile
+      ? `<img src="${esc(v.facsimile)}" alt="Facsimile of ${esc(v.name)}" style="width:100%;border:1px solid var(--rule);margin-bottom:12px">`
+      : `<div style="border:1px dashed var(--rule-2);padding:20px 14px;margin-bottom:12px;text-align:center;font-family:var(--mono);font-size:10px;color:var(--ink-3);line-height:1.6">
+           FACSIMILE SLOT<br><span style="font-size:9px">MoMA Archives, AHB VI.A.38 — not reproduced here.<br>Add a local path to <code>facsimile</code> in the dataset.</span></div>`;
+    return `<div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px">
+        <h3 style="font-family:var(--disp);font-size:24px;text-transform:uppercase;letter-spacing:.03em">${esc(v.name)}</h3>
+        <span class="kv">state ${v.order} of 5 · ${esc(v.date)}</span>
+      </div>
+      ${fac}
+      <div style="display:flex;gap:18px;margin-bottom:12px;flex-wrap:wrap">
+        <div><div class="big">${mt.n}</div><div class="kv">concepts</div></div>
+        <div><div class="big">${mt.m}</div><div class="kv">relations</div></div>
+        <div><div class="big">${mt.cats.person}</div><div class="kv">persons</div></div>
+        <div><div class="big">${f3(mt.density)}</div><div class="kv">density</div></div>
+      </div>
+      <p style="margin:0;font-size:14px">${esc(p.fn)}</p>
+    </div>`;
+  }).join("");
+
+  return `
+  <h2 class="ph">The five states</h2>
+  <p class="lede">Barr's chart survives in five states, held in the MoMA Archives. Read in order they do not accumulate: the second state is the largest and the last is the smallest. <strong>The published chart was reached by compression, not by addition</strong> — and the planes below are five different ways of saying where the compression fell.</p>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(238px,1fr))">${cards}</div>
+
+  <h3 class="sh">Size across the sequence <span>concepts per state</span></h3>
+  ${sizeSpark()}
+  <p class="note">The profile is non-monotonic. Any account of the series as a progressive refinement has to explain the two contractions.</p>
+
+  <h3 class="sh">How to read this instrument</h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(232px,1fr))">
+    <div class="card"><h4>The strip</h4><p style="margin:0;font-size:13.5px">${strip("cubism")} — five cells, one per state, in draft order. Filled means present. The last cell is red: that is the published jacket. The strip appears wherever a concept does.</p></div>
+    <div class="card"><h4>The spine</h4><p style="margin:0;font-size:13.5px">The year rule down the left edge is Barr's device, not a decoration. He ruled 1890–1935 on both margins of every chart, and every graph here is laid out against it.</p></div>
+    <div class="card"><h4>The version bar</h4><p style="margin:0;font-size:13.5px">Excluding a state removes it from every plane at once, including the consensus thresholds. Use it to ask what the series looks like without the working sheets.</p></div>
+    <div class="card"><h4>Divergence</h4><p style="margin:0;font-size:13.5px">Figures printed in red are places where this dataset disagrees with the counts published at NASKO 2025. See <b>Method &amp; provenance</b>.</p></div>
+  </div>`;
+}
+
+function sizeSpark(){
+  const vs=MODEL.versions, max=Math.max(...vs.map(v=>v.metrics.n));
+  const W=760,H=170,pad=34;
+  const x=i=>pad+i*((W-pad*2)/(vs.length-1));
+  const y=n=>H-24-(n/max)*(H-58);
+  const pts=vs.map((v,i)=>[x(i),y(v.metrics.n)]);
+  const path=pts.map((p,i)=>(i?"L":"M")+p[0]+" "+p[1]).join(" ");
+  return `<div class="gwrap"><svg viewBox="0 0 ${W} ${H}" style="height:190px">
+    <path d="${path}" fill="none" stroke="var(--ink)" stroke-width="1.5"/>
+    ${pts.map((p,i)=>`<g>
+      <circle cx="${p[0]}" cy="${p[1]}" r="${i===vs.length-1?6:4.5}" fill="${i===vs.length-1?"var(--oxblood)":"var(--ink)"}"/>
+      <text x="${p[0]}" y="${p[1]-13}" text-anchor="middle" font-family="var(--mono)" font-size="13" font-weight="600" fill="var(--ink)">${vs[i].metrics.n}</text>
+      <text x="${p[0]}" y="${H-7}" text-anchor="middle" font-family="var(--disp)" font-size="11" letter-spacing="1.4" fill="var(--ink-2)">${esc(vs[i].name.toUpperCase())}</text>
+    </g>`).join("")}
+  </svg></div>`;
+}
+
+/* ============================================================
+   PANE I — TERMINOLOGICAL
+   ============================================================ */
+function paneTerm(){
+  const C=MODEL.concepts, vs=sel();
+  const q=(state.termQ||"").toLowerCase();
+  const filt=state.termFilter||"all";
+  const rows = MODEL.all.filter(id=>{
+    const inSel = vs.some(v=>v.set.has(id)); if(!inSel) return false;
+    const life = MODEL.versions.filter(v=>v.set.has(id));
+    if(filt==="core" && life.length!==MODEL.versions.length) return false;
+    if(filt==="hapax" && life.length!==1) return false;
+    if(filt==="relabel" && variants(id).length<2) return false;
+    if(filt==="published" && !MODEL.versions[4].set.has(id)) return false;
+    if(q && !C[id].l.toLowerCase().includes(q) && !variants(id).join(" ").toLowerCase().includes(q)) return false;
+    return true;
+  });
+
+  const relabels=[];
+  for(let i=0;i<MODEL.versions.length-1;i++){
+    const e=codeEdits(MODEL.versions[i],MODEL.versions[i+1],C);
+    e.relabel.forEach(r=>relabels.push({pair:MODEL.versions[i].name+" → "+MODEL.versions[i+1].name,
+      restyle:r.from.toLowerCase()===r.to.toLowerCase(), ...r}));
+  }
+
+  const table = `<div class="tw"><table class="dt">
+    <thead><tr>
+      <th>Concept</th><th>Type</th><th>States</th><th>Surface forms across the series</th>
+      <th class="num">Born</th><th class="num">Last</th>
+    </tr></thead><tbody>
+    ${rows.map(id=>{
+      const life=MODEL.versions.filter(v=>v.set.has(id));
+      const vr=variants(id);
+      return `<tr>
+        <td class="lbl">${dot(C[id].t)}${esc(C[id].l)}</td>
+        <td>${typePill(C[id].t)}</td>
+        <td>${strip(id,true)}</td>
+        <td style="max-width:420px">${vr.map((s,i)=>
+          `<span style="${i&&"color:var(--oxblood)"}">${esc(s)}</span>`).join(' <span style="color:var(--ink-3)">→</span> ')}</td>
+        <td class="num">${esc(life[0].name)}</td>
+        <td class="num">${esc(life[life.length-1].name)}</td>
+      </tr>`;}).join("")}
+    </tbody></table></div>`;
+
+  const born={}, died={};
+  for(let i=0;i<MODEL.versions.length-1;i++){
+    const a=MODEL.versions[i],b=MODEL.versions[i+1],e=codeEdits(a,b,C);
+    born[a.name+"→"+b.name]=e.ins.length; died[a.name+"→"+b.name]=e.del.length;
+  }
+
+  return `
+  <h2 class="ph">Plane I · Terminological</h2>
+  <p class="lede">Words and phrases, after Olson. Not what the categories <em>are</em> but what they are <strong>called</strong>, and how the calling changes. The single most consequential fact in this plane is that Barr begins by describing tendencies and ends by naming entities.</p>
+
+  <div class="callout">
+    <p><b>p15 writes:</b> “Decorative tendency toward abstract design via Japanese prints or ‘primitive’ art of Degas, Gauguin, van Gogh.”</p>
+    <p><b>The jacket writes:</b> JAPANESE PRINTS · SYNTHETISM · NEO-IMPRESSIONISM.</p>
+    <p>A sentence with a verb in it becomes four nouns in boxes. Nothing was learned in between; a grammatical form was chosen.</p>
+  </div>
+
+  <h3 class="sh">Term flux across each transition <span>concepts entering and leaving</span></h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+    ${Object.keys(born).map(k=>`<div class="card">
+      <h4>${esc(k)}</h4>
+      <div style="display:flex;gap:16px">
+        <div><div class="big">+${born[k]}</div><div class="kv">enter</div></div>
+        <div><div class="big red">−${died[k]}</div><div class="kv">leave</div></div>
+      </div></div>`).join("")}
+  </div>
+
+  <h3 class="sh">Relabelling events <span>${relabels.filter(r=>!r.restyle).length} substantive · ${relabels.filter(r=>r.restyle).length} typographic</span></h3>
+  <div class="oplist">${(()=>{let noted=false; return relabels.map(r=>{
+    const brack=/\[/.test(r.to)&&!/\[/.test(r.from);
+    const show=brack&&!noted; if(brack) noted=true;
+    return `<div class="oprow">
+    <div class="opk" style="${r.restyle?"color:var(--ink-3)":""}">${r.restyle?"restyle":"relabel"} · ${esc(r.pair)}</div>
+    <div class="opb"><b>${esc(r.from)}</b> → <b>${esc(r.to)}</b>
+    ${show?'<span class="opn">Square brackets, appearing on three categories at once and in no earlier state. The qualifier is now marked as the classifier’s rather than the movement’s — publication is where a classifier becomes accountable for a claim.</span>':""}</div>
+  </div>`;}).join("");})()||'<div class="oprow"><div class="opk">—</div><div class="opb">No relabelling in the selected states.</div></div>'}</div>
+  <p class="note">Typographic restyling is separated out but not discarded. The march from mixed case through small capitals to full capitals is the chart moving from a working register to a published one, and it happens to the labels before it happens to the structure.</p>
+
+  <h3 class="sh">Label ledger <span>${rows.length} of ${MODEL.all.length} concepts</span></h3>
+  <div class="ctl">
+    <label for="termq">Find</label>
+    <input type="search" id="termq" placeholder="concept or surface form" value="${esc(state.termQ||"")}">
+    <div class="seg" id="termfilt">
+      ${[["all","All"],["core","In all five"],["hapax","Appears once"],["relabel","Relabelled"],["published","Survives to jacket"]]
+        .map(([k,l])=>`<button data-k="${k}" class="${filt===k?"on":""}">${l}</button>`).join("")}
+    </div>
+  </div>
+  ${table}
+  <p class="note">“Negro art” on p15 becomes “Negro Sculpture” in a ruled box on every later state. The relabelling and the boxing happen together, and the box is what matters: it converts a source into an input that feeds the tree without ever occupying a position on it. Plane V returns to this.</p>`;
+}
+
+function variants(id){
+  const out=[];
+  MODEL.versions.forEach(v=>{ if(!v.set.has(id)) return;
+    const s=label(v,id); if(out[out.length-1]!==s) out.push(s); });
+  return out;
+}
+
+/* ============================================================
+   PANE II — CONCEPTUAL
+   ============================================================ */
+function paneConc(){
+  const C=MODEL.concepts, vs=sel();
+  const pub=PUBLISHED;
+
+  const countRows = MODEL.versions.map(v=>{
+    const p=pub.counts[v.id], c=v.metrics.n, dv=c!==p;
+    return `<tr><td class="lbl">${esc(v.name)}</td>
+      <td class="num">${c}</td>
+      <td class="num ${dv?"divergent":""}">${p}</td>
+      <td class="num ${dv?"divergent":""}">${dv?(c>p?"+":"")+(c-p):"—"}</td>
+      <td>${Object.entries(v.metrics.cats).filter(e=>e[1]).map(([t,n])=>
+        `${dot(t)}<span style="color:var(--ink-2)">${n}</span>`).join("&nbsp;&nbsp;")}</td></tr>`;
+  }).join("");
+
+  const maxN=Math.max(...MODEL.versions.map(v=>v.metrics.n));
+  const bars = MODEL.versions.map(v=>{
+    const c=v.metrics.cats, tot=v.metrics.n;
+    return `<div class="barrow">
+      <div class="bn">${esc(v.name)}</div>
+      <div class="bt" style="width:${(tot/maxN*100).toFixed(1)}%">
+        ${TYPE_ORDER.map(t=>c[t]?`<i style="background:${TYPE_COLOR[t]};width:${(c[t]/tot*100).toFixed(2)}%" title="${TYPE_LABEL[t]}: ${c[t]}"></i>`:"").join("")}
+      </div>
+      <div class="bv">${tot} · ${Math.round(c.person/tot*100)}% persons</div>
+    </div>`;
+  }).join("");
+
+  /* Jaccard matrix over selected */
+  const usePub = state.mxSrc!=="computed";
+  const cell=(a,b)=>{
+    const key=[a.id,b.id].sort().join("|");
+    if(usePub && PUBLISHED.jaccard[key]) return {j:PUBLISHED.jaccard[key][0], inter:PUBLISHED.jaccard[key][1], key};
+    const r=jaccard(a.set,b.set); return {j:r.j, inter:r.inter, key};
+  };
+  const mx = `<table class="mx"><thead><tr><th></th>${vs.map(v=>`<th>${esc(v.name)}</th>`).join("")}</tr></thead><tbody>
+    ${vs.map(a=>`<tr><th style="text-align:right">${esc(a.name)}</th>${vs.map(b=>{
+      if(a.id===b.id) return `<td class="self" style="background:var(--paper-3)"><span class="j">1.000</span><span class="n">${usePub?PUBLISHED.counts[a.id]:a.metrics.n}</span></td>`;
+      const r=cell(a,b);
+      const g=Math.round(255-r.j*150);
+      const isSel=state.mxSel===r.key;
+      return `<td data-mx="${r.key}" class="${isSel?"sel":""}" style="background:rgb(${g-8},${g-4},${g});color:${r.j>.42?"#F1EFEA":"var(--ink)"}">
+        <span class="j">${f3(r.j)}</span><span class="n">∩ ${r.inter}</span></td>`;
+    }).join("")}</tr>`).join("")}
+  </tbody></table>`;
+
+  let mxDetail="";
+  if(state.mxSel){
+    const [ia,ib]=state.mxSel.split("|");
+    const a=MODEL.versions.find(v=>v.id===ia), b=MODEL.versions.find(v=>v.id===ib);
+    if(a&&b){
+      const both=a.nodes.filter(x=>b.set.has(x));
+      const onlyA=a.nodes.filter(x=>!b.set.has(x));
+      const onlyB=b.nodes.filter(x=>!a.set.has(x));
+      const chip=ids=>`<div class="chips">${ids.slice(0,80).map(x=>
+        `<span>${dot(C[x].t)}${esc(C[x].l)}</span>`).join("")}${ids.length>80?`<span>+${ids.length-80}</span>`:""}</div>`;
+      mxDetail=`<div class="card" style="margin-top:14px">
+        <h4>${esc(a.name)} ∩ ${esc(b.name)} — ${both.length} shared, ${onlyA.length} only in ${esc(a.name)}, ${onlyB.length} only in ${esc(b.name)}</h4>
+        <div style="display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+          <div><div class="kv" style="margin-bottom:5px">Shared</div>${chip(both)}</div>
+          <div><div class="kv" style="margin-bottom:5px">Only ${esc(a.name)}</div>${chip(onlyA)}</div>
+          <div><div class="kv" style="margin-bottom:5px">Only ${esc(b.name)}</div>${chip(onlyB)}</div>
+        </div></div>`;
+    }
+  }
+
+  const core=MODEL.all.filter(id=>MODEL.versions.every(v=>v.set.has(id)));
+  const hapax=MODEL.all.filter(id=>MODEL.versions.filter(v=>v.set.has(id)).length===1);
+
+  return `
+  <h2 class="ph">Plane II · Conceptual</h2>
+  <p class="lede">Extension and composition: what each state contains, and of what kinds. This is where the series stops looking like a draft becoming clearer and starts looking like <strong>two registers being developed side by side</strong> — one dense with persons, one dense with movements.</p>
+
+  <h3 class="sh">Concept counts <span>computed against published</span></h3>
+  <div class="tw"><table class="dt"><thead><tr>
+    <th>State</th><th class="num">Computed</th><th class="num">Published 2025</th><th class="num">Δ</th><th>Composition</th>
+  </tr></thead><tbody>${countRows}</tbody></table></div>
+  <p class="note">Red marks divergence between this reconstruction and the counts read at NASKO. The pattern of the sequence survives the divergence; the absolute figures should be taken from the authoritative coding.</p>
+
+  <h3 class="sh">Composition by kind <span>the finding of this plane</span></h3>
+  <div class="bars">${bars}</div>
+  <div class="legend">${TYPE_ORDER.map(t=>`<span>${dot(t)}${TYPE_LABEL[t]}</span>`).join("")}</div>
+  <div class="callout" style="margin-top:20px">
+    <p>Personal names dominate the two expansive states and are almost gone from the jacket. Barr does not learn more artists and then print more artists — he <strong>gathers persons and then abstracts them away</strong>, leaving movements behind.</p>
+    <p>The impersonality of the famous chart is an achieved effect, not a premise. Only the series shows this; the jacket alone conceals it.</p>
+  </div>
+
+  <h3 class="sh">Pairwise similarity <span>Jaccard · click a cell to see the sets</span></h3>
+  <div class="ctl">
+    <label>Figures from</label>
+    <div class="seg" id="mxsrc">
+      <button data-k="published" class="${usePub?"on":""}">Published 2025</button>
+      <button data-k="computed" class="${usePub?"":"on"}">This reconstruction</button>
+    </div>
+    <span class="kv">${usePub?"authoritative — the sets below are still the reconstruction's":"reconstruction runs high: the states here share more backbone than Barr's sheets do"}</span>
+  </div>
+  ${mx}${mxDetail}
+  <p class="note">Whichever source you choose, one relation holds: <b>Cover is closest to p19, not to p21</b>. That is the observation Plane IV is built on, and it survives the divergence between the two codings.</p>
+
+  <h3 class="sh">Core and hapax <span>${core.length} in every state · ${hapax.length} in one only</span></h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+    <div class="card"><h4>Present in all five states</h4>
+      <div class="chips">${core.map(x=>`<span>${dot(C[x].t)}${esc(C[x].l)}</span>`).join("")}</div>
+      <p class="note" style="margin-top:10px">The irreducible commitment: what Barr never once considered leaving out.</p></div>
+    <div class="card"><h4>Present in one state only</h4>
+      <div class="chips">${hapax.map(x=>`<span>${dot(C[x].t)}${esc(C[x].l)} ${strip(x,true)}</span>`).join("")}</div>
+      <p class="note" style="margin-top:10px">Mostly the discarded vocabulary of p15 — plus Modern Architecture, which enters at the jacket with no source in any draft.</p></div>
+  </div>`;
+}
+
+/* ============================================================
+   PANE III — STRUCTURAL
+   ============================================================ */
+function paneStruct(){
+  const C=MODEL.concepts, vs=sel().slice(0,3);
+  const filt = state.gfilter==="movements"
+    ? (id=>C[id].t==="movement"||C[id].t==="source")
+    : state.gfilter==="nopersons" ? (id=>C[id].t!=="person") : null;
+
+  const graphs = vs.map(v=>{
+    const L=layout(v,C,{filter:filt});
+    return `<div class="gwrap">
+      <div class="ghead"><b>${esc(v.name)}</b><em>${L.nodes.length} nodes · ${L.edges.length} arcs · depth ${v.metrics.depth} · density ${f3(v.metrics.density)}</em></div>
+      ${svgGraph(L,v.id)}
+      <div class="zhint">scroll to zoom · drag to pan · double-click to reset</div>
+    </div>`;
+  }).join("");
+
+  const statRows = sel().map(v=>{
+    const m=v.metrics;
+    return `<tr><td class="lbl">${esc(v.name)}</td>
+      <td class="num">${m.n}</td><td class="num">${m.m}</td>
+      <td class="num">${f3(m.density)}</td><td class="num">${m.depth}</td>
+      <td class="num">${m.roots.length}</td><td class="num">${m.sinks.length}</td>
+      <td class="num">${m.comm.length}</td>
+      <td class="lbl">${topPR(v,1).map(x=>esc(label(v,x))).join("")}</td></tr>`;
+  }).join("");
+
+  /* PageRank comparison */
+  const universe=[...new Set(sel().flatMap(v=>topPR(v,10)))]
+    .map(id=>({id, best:Math.min(...sel().filter(v=>v.set.has(id)).map(v=>prRank(v,id)))}))
+    .sort((a,b)=>a.best-b.best).slice(0,20).map(o=>o.id);
+  const prRows=universe.map(id=>{
+    const cells=sel().map(v=>{
+      if(!v.set.has(id)) return `<td class="num" style="color:var(--ink-3)">—</td>`;
+      const r=prRank(v,id);
+      return `<td class="num">${r}<span style="color:var(--ink-3);font-size:9.5px"> · ${f3(v.metrics.pr[id])}</span></td>`;
+    }).join("");
+    return `<tr><td class="lbl">${dot(C[id].t)}${esc(C[id].l)}</td>${cells}</tr>`;
+  }).join("");
+
+  const pubPR=`<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+    ${Object.entries(PUBLISHED.pagerank).map(([k,rows])=>`<div class="card">
+      <h4>Published PageRank · ${esc(k)}</h4>
+      <table class="dt"><thead><tr><th>Concept</th><th class="num">in</th><th class="num">out</th><th class="num">PR</th></tr></thead>
+      <tbody>${rows.map(r=>`<tr><td class="lbl">${esc(r[0])}</td><td class="num">${r[1]}</td><td class="num">${r[2]}</td><td class="num">${f3(r[3])}</td></tr>`).join("")}</tbody></table>
+    </div>`).join("")}</div>`;
+
+  const covComm=MODEL.versions[4].metrics.comm.slice(0,6).map((g,i)=>`<div class="card">
+    <h4>Cluster ${i+1} · ${g.length} concepts</h4>
+    <div class="chips">${g.map(x=>`<span>${dot(C[x].t)}${esc(C[x].l)}</span>`).join("")}</div></div>`).join("");
+
+  return `
+  <h2 class="ph">Plane III · Structural</h2>
+  <p class="lede">Position and relational logic, after Adler, Tennis and Hajibayova. A concept can survive every state and still be moved — and the movement is the classificatory act. <strong>The most robust relation in Barr's chart is not influence. It is geography.</strong></p>
+
+  <div class="ctl">
+    <label>Show</label>
+    <div class="seg" id="gfilt">
+      ${[["all","Everything"],["nopersons","No persons"],["movements","Movements and sources only"]]
+        .map(([k,l])=>`<button data-k="${k}" class="${state.gfilter===k?"on":""}">${l}</button>`).join("")}
+    </div>
+    <span class="kv">drawing the first ${vs.length} selected state${vs.length>1?"s":""} · zoom for labels</span>
+  </div>
+  <div class="grid">${graphs}</div>
+  <p class="note">Every arc points strictly downward: nodes are banded by Barr's year axis, then relaxed so no relation runs backwards in time. Barr's own sheets sometimes cheat on this; the drawing does not.</p>
+
+  <h3 class="sh">Graph statistics</h3>
+  <div class="tw"><table class="dt"><thead><tr>
+    <th>State</th><th class="num">Order</th><th class="num">Size</th><th class="num">Density</th>
+    <th class="num">Depth</th><th class="num">Roots</th><th class="num">Sinks</th><th class="num">Clusters</th><th>Highest PageRank</th>
+  </tr></thead><tbody>${statRows}</tbody></table></div>
+
+  <h3 class="sh">PageRank divergence <span>rank · score, per state</span></h3>
+  <div class="tw"><table class="dt"><thead><tr><th>Concept</th>${sel().map(v=>`<th class="num">${esc(v.name)}</th>`).join("")}</tr></thead>
+  <tbody>${prRows}</tbody></table></div>
+  <div class="callout">
+    <p>On p15 the highest-ranked nodes are people and secondary cities — Kandinsky, Russia, Duchamp, Dresden. On the jacket the top node is <strong>Paris</strong>, an absorbing sink with no outgoing arcs at all.</p>
+    <p>Between the working sheet and the published chart the organising principle changes from biography to geography-plus-movement. No concept had to be added or removed for that to happen.</p>
+  </div>
+  ${pubPR}
+
+  <h3 class="sh">Clusters in the published state <span>label propagation</span></h3>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">${covComm}</div>
+  <p class="note">Clusters that hold across states indicate interpretive coherence; clusters that fragment mark where the scheme was still being argued with. Compare by excluding states in the bar above.</p>`;
+}
+function topPR(v,k){ return Object.entries(v.metrics.pr).sort((a,b)=>b[1]-a[1]).slice(0,k).map(e=>e[0]); }
+function prRank(v,id){ return Object.entries(v.metrics.pr).sort((a,b)=>b[1]-a[1]).findIndex(e=>e[0]===id)+1; }
+
+/* ---------- svg graph with pan/zoom ---------- */
+function svgGraph(L, key){
+  const arcs=L.edges.map(e=>{
+    const {a,b}=e; if(!a||!b) return "";
+    const y1=a.y+a.h/2, y2=b.y-b.h/2, mid=(y1+y2)/2;
+    return `<path d="M${f2(a.x)} ${f2(y1)} C ${f2(a.x)} ${f2(mid)}, ${f2(b.x)} ${f2(mid)}, ${f2(b.x)} ${f2(y2)}"
+      fill="none" stroke="var(--ink-3)" stroke-width="${e.w?.7:1}" ${e.w?'stroke-dasharray="3 3"':""} opacity=".62" marker-end="url(#ah-${key})"/>`;
+  }).join("");
+  const nodes=L.nodes.map(n=>{
+    const c=TYPE_COLOR[n.type];
+    const box=n.type==="source";
+    return `<g class="nd" data-id="${n.id}">
+      <rect x="${f2(n.x-n.w/2)}" y="${f2(n.y-n.h/2)}" width="${f2(n.w)}" height="${n.h}"
+        rx="${box?0:2}" class="nbox" fill="${box?"transparent":"var(--card)"}"
+        stroke="${box?c:"transparent"}" stroke-width="${box?1:0}"/>
+      <text class="nlabel" x="${f2(n.x)}" y="${f2(n.y+3.5)}" text-anchor="middle" fill="${c}">${esc(n.label)}</text>
+    </g>`;
+  }).join("");
+  return `<svg viewBox="0 0 ${Math.round(L.width)} ${Math.round(L.height)}" style="width:100%;height:auto" data-g="${key}">
+    <defs><marker id="ah-${key}" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+      <path d="M0 1 L7 4 L0 7 z" fill="var(--ink-3)"/></marker></defs>
+    <g class="cam">${arcs}${nodes}</g></svg>`;
+}
+
+/* ============================================================
+   PANE IV — GENETIC
+   ============================================================ */
+function paneGenetic(){
+  const C=MODEL.concepts, vs=sel();
+  const cons=consensusEdges(vs);
+  const th=Math.min(state.thresh, vs.length);
+  const keep=Object.entries(cons).filter(([,n])=>n>=th);
+  const cnodes=new Set(); keep.forEach(([k])=>{const[s,t]=k.split(">");cnodes.add(s);cnodes.add(t);});
+  const pseudo={id:"consensus", name:"consensus", labels:{},
+    nodes:[...cnodes], edges:keep.map(([k])=>{const[s,t]=k.split(">");return [s,t,false];}), set:cnodes};
+  const L=layout(pseudo,C,{});
+
+  const ranked=Object.entries(cons).sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0]));
+  const consRows=ranked.slice(0,26).map(([k,n])=>{
+    const[s,t]=k.split(">");
+    return `<tr><td class="lbl">${dot(C[s].t)}${esc(C[s].l)}</td><td class="lbl">${dot(C[t].t)}${esc(C[t].l)}</td>
+      <td class="num" style="${n>=vs.length?"color:var(--oxblood);font-weight:600":""}">${n}</td>
+      <td><span class="strip sm">${MODEL.versions.map((v,i)=>`<i class="${edgeKeys(v).has(k)?"p":""}${edgeKeys(v).has(k)&&i===4?" last":""}"></i>`).join("")}</span></td></tr>`;
+  }).join("");
+
+  /* chronology vs similarity */
+  const last=MODEL.versions[MODEL.versions.length-1];
+  const chrono=MODEL.versions.map((v,i)=>({
+    v, i, toPrev: i? jaccard(MODEL.versions[i-1].set, v.set).j : null,
+    toCover: jaccard(v.set,last.set).j
+  }));
+
+  /* edit grammar */
+  const pairs=[]; for(let i=0;i<MODEL.versions.length-1;i++) pairs.push([MODEL.versions[i],MODEL.versions[i+1]]);
+  const pi=Math.min(state.editPair,pairs.length-1);
+  const [A,B]=pairs[pi];
+  const E=codeEdits(A,B,C);
+  const noted=NOTED_OPS[A.id+">"+B.id]||[];
+  const opCard=(k,val,desc)=>`<div class="card"><h4>${k}</h4><div class="big${/collapse|deletion/i.test(k)?" red":""}">${val}</div><p class="note" style="margin-top:4px;font-style:normal">${desc}</p></div>`;
+
+  return `
+  <h2 class="ph">Plane IV · Genetic</h2>
+  <p class="lede">The series read as a trajectory rather than a set. This plane is proposed as an addition to the existing comparison frameworks, and it earns its place here for one reason: <strong>similarity does not track chronology</strong>. The order of the drafts alone would have misled us.</p>
+
+  <h3 class="sh">Similarity against draft order <span>Jaccard to the previous state, and to the jacket</span></h3>
+  ${chronoPlot(chrono)}
+  <div class="callout">
+    <p>The published jacket is far closer to <b>p19</b> than to <b>p21</b>, the state that immediately precedes it. Meanwhile <b>Insert</b> and <b>p21</b> — non-adjacent — form the tightest pair in the whole series.</p>
+    <p>This is not one line of refinement. It is two registers worked in parallel: a scholarly, person-dense register (Insert, p21) and a public, movement-dense register (p19, Cover). The jacket does not descend from the state before it. It descends from the state before that.</p>
+  </div>
+
+  <h3 class="sh">Consensus relations <span>arcs present in n or more selected states</span></h3>
+  <div class="ctl">
+    <label for="th">Threshold n ≥</label>
+    <input type="range" id="th" min="1" max="${vs.length}" value="${th}">
+    <span class="kv" style="font-size:13px;font-family:var(--mono)">${th}</span>
+    <span class="kv">${keep.length} arcs · ${cnodes.size} concepts survive</span>
+  </div>
+  <div class="gwrap"><div class="ghead"><b>Consensus n ≥ ${th}</b><em>${keep.length} arcs · ${cnodes.size} concepts</em></div>
+    ${svgGraph(L,"cons")}<div class="zhint">scroll to zoom · drag to pan</div></div>
+  <p class="note">Raise the threshold to strip the chart down to what Barr never revised. In the published coding the arcs surviving all five states are three sitings — Cubism to Paris, Fauvism to Paris, Futurism to Milan — and the influence spine appears only one step below. <b>The most robust relation in the chart is where a movement happened, not what caused it.</b></p>
+  <div class="card" style="margin-top:14px">
+    <h4>Published consensus ranking · Leazer 2025</h4>
+    <table class="dt"><thead><tr><th>Source</th><th>Target</th><th class="num">n</th></tr></thead><tbody>
+    ${PUBLISHED.consensus.map(r=>`<tr><td class="lbl">${esc(r[0])}</td><td class="lbl">${esc(r[1])}</td><td class="num" style="${r[2]===5?"color:var(--oxblood);font-weight:600":""}">${r[2]}</td></tr>`).join("")}
+    </tbody></table>
+  </div>
+
+  <div class="tw" style="margin-top:14px"><table class="dt"><thead><tr>
+    <th>Source</th><th>Target</th><th class="num">n</th><th>States</th></tr></thead><tbody>${consRows}</tbody></table></div>
+
+  <h3 class="sh">Edit grammar <span>operations coded between adjacent states</span></h3>
+  <div class="ctl"><div class="seg" id="editpair">
+    ${pairs.map((p,i)=>`<button data-i="${i}" class="${i===pi?"on":""}">${esc(p[0].name)} → ${esc(p[1].name)}</button>`).join("")}
+  </div></div>
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(146px,1fr))">
+    ${opCard("Insertion", E.ins.length, "Concepts entering")}
+    ${opCard("Deletion", E.del.length, "Concepts leaving")}
+    ${opCard("Relabelling", E.relabel.length, "Same concept, new surface form")}
+    ${opCard("Rewiring", E.wireAdd.length+E.wireCut.length, "Arcs changed between concepts that both persist")}
+    ${opCard("Granularity collapse", E.collapsed.length, "Persons absorbed into a surviving parent")}
+    ${opCard("Promotion", E.promoted.length, "Substantial rise in PageRank rank")}
+    ${opCard("Demotion", E.demoted.length, "Substantial fall in PageRank rank")}
+    ${opCard("Hedging", E.hedged.length+E.dehedged.length, "Brackets or quotes gained or lost")}
+  </div>
+
+  <div class="oplist" style="margin-top:16px">
+    ${noted.map(o=>`<div class="oprow"><div class="opk">${esc(o.op)}</div>
+      <div class="opb"><b>${esc(o.a)}</b> → <b>${esc(o.b)}</b><span class="opn">${esc(o.note)}</span></div></div>`).join("")}
+    ${E.promoted.slice(0,3).map(s=>`<div class="oprow"><div class="opk">promotion</div>
+      <div class="opb"><b>${esc(C[s.id].l)}</b> rank ${s.from} → ${s.to}<span class="opn">Moved up ${s.d} places without any change to its own label.</span></div></div>`).join("")}
+    ${E.demoted.slice(0,3).map(s=>`<div class="oprow"><div class="opk">demotion</div>
+      <div class="opb"><b>${esc(C[s.id].l)}</b> rank ${s.from} → ${s.to}<span class="opn">Fell ${-s.d} places. Retained, but no longer load-bearing.</span></div></div>`).join("")}
+  </div>
+  <p class="note">Merge, split and exogenisation cannot be inferred from node and edge sets alone; those rows are hand-coded from the facsimiles and carry their warrant in the text. Everything else on this screen is computed.</p>`;
+}
+
+function chronoPlot(rows){
+  const W=820,H=250,padL=52,padR=20,padT=22,padB=44;
+  const x=i=>padL+i*((W-padL-padR)/(rows.length-1));
+  const y=v=>H-padB-v*(H-padT-padB);
+  const line=(key,color,dash)=>{
+    const pts=rows.filter(r=>r[key]!==null).map(r=>[x(r.i),y(r[key])]);
+    return `<path d="${pts.map((p,i)=>(i?"L":"M")+f2(p[0])+" "+f2(p[1])).join(" ")}" fill="none"
+      stroke="${color}" stroke-width="1.6" ${dash?'stroke-dasharray="4 3"':""}/>
+      ${pts.map(p=>`<circle cx="${f2(p[0])}" cy="${f2(p[1])}" r="4" fill="${color}"/>`).join("")}`;
+  };
+  const labels=rows.filter(r=>r.toCover!==null).map(r=>
+    `<text x="${f2(x(r.i))}" y="${f2(y(r.toCover)-11)}" text-anchor="middle" font-family="var(--mono)" font-size="10.5" fill="var(--oxblood)">${f2(r.toCover)}</text>`).join("");
+  return `<div class="gwrap"><svg viewBox="0 0 ${W} ${H}" style="height:270px">
+    ${[0,.25,.5,.75,1].map(g=>`<g><line x1="${padL}" x2="${W-padR}" y1="${f2(y(g))}" y2="${f2(y(g))}" stroke="var(--rule)"/>
+      <text x="${padL-8}" y="${f2(y(g)+3)}" text-anchor="end" font-family="var(--mono)" font-size="9" fill="var(--ink-3)">${g.toFixed(2)}</text></g>`).join("")}
+    ${line("toPrev","var(--ink-2)",true)}
+    ${line("toCover","var(--oxblood)",false)}
+    ${labels}
+    ${rows.map(r=>`<text x="${f2(x(r.i))}" y="${H-18}" text-anchor="middle" font-family="var(--disp)" font-size="11.5" letter-spacing="1.3" fill="var(--ink-2)">${esc(r.v.name.toUpperCase())}</text>`).join("")}
+    <text x="${W-padR}" y="${padT-6}" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--oxblood)">— similarity to the jacket</text>
+    <text x="${W-padR}" y="${padT+8}" text-anchor="end" font-family="var(--mono)" font-size="10" fill="var(--ink-2)">- - similarity to the previous state</text>
+  </svg></div>`;
+}
+
+/* ============================================================
+   PANE V — PRAGMATIC
+   ============================================================ */
+function paneprag(){
+  const cards=MODEL.versions.map(v=>{
+    const p=v.pragmatic;
+    return `<div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px">
+        <h3 style="font-family:var(--disp);font-size:20px;text-transform:uppercase;letter-spacing:.04em">${esc(v.name)}</h3>
+        <span class="kv">${esc(v.date)}</span></div>
+      <dl class="dossier">
+        <dt>Support</dt><dd>${esc(p.support)}</dd>
+        <dt>Audience</dt><dd>${esc(p.audience)}</dd>
+        <dt>Permanence</dt><dd>${esc(p.permanence)}</dd>
+        <dt>Constraint</dt><dd>${esc(p.constraint)}</dd>
+        <dt>Function</dt><dd>${esc(p.fn)}</dd>
+        <dt>Yields</dt><dd><span class="kv" style="font-size:11px">${v.metrics.n} concepts · ${Math.round(v.metrics.cats.person/v.metrics.n*100)}% persons · density ${f3(v.metrics.density)}</span></dd>
+      </dl></div>`;
+  }).join("");
+
+  const readings=[
+    ["82 concepts on the Insert, 30 on the jacket",
+     "The insert folds out; the jacket does not. Barr can afford eighty-two concepts on a sheet that opens past the trim of the book and cannot afford thirty-one on one that must read at arm's length across a shop. The ontology is shaped by the fold."],
+    ["Persons collapse into movements",
+     "A name has to be read to be useful. At jacket scale, a name in six-point type is a texture, not a datum. The only persons that survive are the ones doing argumentative work as precursors — Cézanne, Seurat, Van Gogh, Gauguin, Rousseau, Redon, Brancusi."],
+    ["Paris becomes an absorbing sink",
+     "A viewer scanning a dust jacket needs somewhere for the eye to land. Geography supplies a spatial logic that biography cannot, because cities can be arranged and artists cannot. The structural finding of Plane III has a typographic cause."],
+    ["Brackets appear only at the jacket",
+     "[ABSTRACT] EXPRESSIONISM hedges where ABSTRACT EXPRESSIONISM did not. Publication is where a classifier becomes accountable for a claim, and the bracket is the mark of that accountability — visible in no working state."],
+    ["Modern Architecture enters last",
+     "The one concept unique to the published state, arriving with no precedent in any draft — the incidence table records it in the jacket alone. Plane II can tell you that; it cannot tell you why. A candidate worth testing in the archive is institutional: architecture had its own standing at MoMA by 1936, and the jacket is the state with an institution behind it. That is a hypothesis for the correspondence files, not a finding of this instrument."]
+  ];
+
+  return `
+  <h2 class="ph">Plane V · Pragmatic</h2>
+  <p class="lede">Occasion, medium, audience. This plane is deliberately not metricised — it is the interpretive variable the other four are read against. <strong>Standardisation arrives here through the material channel rather than through explicit policy</strong>, which is exactly the case Star's question was aimed at.</p>
+
+  <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">${cards}</div>
+
+  <h3 class="sh">Reading the other planes against the occasion</h3>
+  <div class="oplist">
+    ${readings.map(([a,b])=>`<div class="oprow" style="grid-template-columns:260px 1fr">
+      <div class="opk" style="color:var(--ink);font-family:var(--disp);font-size:12px;letter-spacing:.08em;text-transform:none">${esc(a)}</div>
+      <div class="opb">${esc(b)}</div></div>`).join("")}
+  </div>
+
+  <div class="callout" style="margin-top:26px">
+    <p>The four quantitative planes locate where Barr's commitments hardened. They cannot say why they hardened <em>there</em>. This plane is the paper's answer to that, and its honesty depends on staying descriptive: these are dossiers, not scores.</p>
+    <p>Both halves of that sentence are the finding.</p>
+  </div>`;
+}
+
+/* ============================================================
+   PANE — METHOD
+   ============================================================ */
+function paneMethod(){
+  const steps=[
+    ["Version census and ordering","Enumerate the surviving states, establish the sequence from archival, bibliographic and internal evidence, and record confidence. Treat the order as a hypothesis the analysis can test — Plane IV does exactly that, and the test comes back negative for a simple linear reading."],
+    ["Extraction rules","Define what counts as a node (movement, person, place, non-modern source, tendency) and what counts as an arc. Solid and dashed lines are coded as strong and weak influence; the ruled year axis is an ordering constraint; a red or boxed frame marks exogeneity."],
+    ["Canonical crosswalk","Map surface labels to concept identifiers and document every merge and split. This is where the analyst's own classification enters, so it is published with the results rather than buried in preprocessing."],
+    ["Node typing","Assign each concept to a kind. The composition profile that falls out of this step is the strongest single finding in Plane II."],
+    ["Matrix construction","Build the incidence table (concept × state) and one adjacency table per state."],
+    ["Plane metrics","Run each of the five planes independently. Partial application is legitimate; the planes do not depend on one another."],
+    ["Consensus thresholding","Rank arcs by how many states contain them and generate nested consensus graphs. The strata are strata of commitment."],
+    ["Operation coding","Code the difference between adjacent states with the closed edit grammar below."]
+  ];
+  const grammar=[
+    ["insertion","A concept enters."],["deletion","A concept leaves."],
+    ["relabelling","The concept persists; the surface form changes."],
+    ["merge","Two or more concepts are replaced by one."],["split","One concept is replaced by several."],
+    ["rewiring","Arcs change while both endpoints persist."],
+    ["promotion / demotion","Structural prominence changes without any change to the concept itself."],
+    ["granularity collapse","Members are absorbed into a surviving parent — here, persons into movements."],
+    ["hedging / de-hedging","Brackets, quotation marks or dashed lines are gained or lost."],
+    ["exogenisation","A concept is moved into a bordered box that feeds the scheme without occupying a position in it."]
+  ];
+  return `
+  <h2 class="ph">Method &amp; provenance</h2>
+  <p class="lede">The system is deliberately modest: countable, hand-checkable, and reproducible without specialised infrastructure. It does not adjudicate correctness, measure quality, or recover intent. It describes difference and locates it.</p>
+
+  <h3 class="sh">The eight-step protocol</h3>
+  <div class="oplist">${steps.map(([t,d],i)=>`<div class="oprow" style="grid-template-columns:44px 1fr">
+    <div class="opk" style="font-size:15px;color:var(--oxblood)">${i+1}</div>
+    <div class="opb"><b style="background:none;padding:0;font-family:var(--disp);font-size:13px;letter-spacing:.06em;text-transform:uppercase">${esc(t)}</b><span class="opn" style="font-style:normal">${esc(d)}</span></div></div>`).join("")}</div>
+
+  <h3 class="sh">Closed edit grammar</h3>
+  <div class="tw"><table class="dt"><thead><tr><th>Operation</th><th>Definition</th></tr></thead><tbody>
+    ${grammar.map(([a,b])=>`<tr><td style="color:var(--oxblood)">${esc(a)}</td><td class="lbl">${esc(b)}</td></tr>`).join("")}
+  </tbody></table></div>
+
+  <h3 class="sh">Provenance — read this before citing anything here</h3>
+  <div class="callout">
+    <p><b>The dataset shipped with this page is a reconstruction, not the authoritative coding.</b> Node and arc sets were rebuilt from the chart facsimiles and from the tables printed in Leazer, “The Development and Comparison of Small-Scale Classifications for Knowledge Organization,” NASKO, 20 June 2025. Where the two disagree, the figure is printed in red and the published value is shown beside it.</p>
+    <p>Two disagreements are worth resolving in the source coding rather than here. First, the deck's incidence table lists 24 concepts while its count table reports 30 to 82 per state, so the two tables are not drawn from the same extraction. Second, the published composition figures give the jacket only 2 geographic names, but the jacket's own DAG figure and its PageRank table (Paris, in-degree 11) require many more. One of those two passes needs to win.</p>
+    <p>Arc-level fidelity is lowest for p15 and p21 — the annotated sheets, where the hand is smallest and the overwriting heaviest.</p>
+    <p><b>Facsimiles are not reproduced.</b> The MoMA Archives sheets carry a study-use restriction. Each state has an empty <code>facsimile</code> field; point it at a local file if your rights permit.</p>
+  </div>
+
+  <h3 class="sh">Integrity check <span>run on load</span></h3>
+  <div class="tw"><table class="dt"><thead><tr><th>State</th><th class="num">Concepts</th><th class="num">Arcs</th><th class="num">Back-edges removed</th><th>Contradictions</th></tr></thead><tbody>
+    ${MODEL.versions.map(v=>`<tr><td class="lbl">${esc(v.name)}</td><td class="num">${v.metrics.n}</td><td class="num">${v.metrics.m}</td>
+      <td class="num" style="${v.backEdges.length?"color:var(--oxblood)":""}">${v.backEdges.length}</td>
+      <td class="lbl">${v.backEdges.length?v.backEdges.map(e=>esc(MODEL.concepts[e[0]].l)+" → "+esc(MODEL.concepts[e[1]].l)).join("; "):"—"}</td></tr>`).join("")}
+  </tbody></table></div>
+  <p class="note">A back-edge means the coding asserts that A precedes B and B precedes A. The instrument removes it so the drawing stays a DAG, and reports it here so you can fix the coding instead. Zero is the number you want.</p>
+
+  <h3 class="sh">Replace the dataset</h3>
+  <p class="lede" style="margin-bottom:12px">Everything on this page is computed live from one object. Export it, edit it against your coding, and load it back — every plane recomputes.</p>
+  <div class="ctl">
+    <button class="mini" id="expJSON">Export current dataset (JSON)</button>
+    <button class="mini" id="expCSV">Export incidence table (CSV)</button>
+    <label for="impJSON" class="mini" style="cursor:pointer;display:inline-block">Load dataset…</label>
+    <input type="file" id="impJSON" accept=".json" style="position:absolute;width:1px;height:1px;opacity:0">
+    <span class="kv" id="impMsg"></span>
+  </div>
+  <p class="note">The JSON carries five keys: <code>concepts</code>, <code>versions</code>, <code>members</code>, <code>skeleton</code>, <code>sited</code>. Movement membership and place attribution are stored once and expanded into arcs at load, so a personnel correction is a one-line edit rather than forty.</p>
+
+  <h3 class="sh">What this instrument cannot do</h3>
+  <p class="lede">It does not illuminate motivation, and it does not connect the chart to the culture that produced it. It cannot see hesitation, erasure, the affective weight of a boxed category, or the institutional politics of a museum in 1936. Converting hedged, dashed, hand-annotated sheets into binary matrices is itself a priori standardisation performed by the analyst — publishing the crosswalk is the only available mitigation. Star's question returns here as a methodological obligation rather than a slogan.</p>`;
+}
+
+/* ============================================================
+   CONTROLLER
+   ============================================================ */
+const RENDERERS = {states:paneStates, term:paneTerm, conc:paneConc,
+  struct:paneStruct, genetic:paneGenetic, prag:paneprag, method:paneMethod};
+
+function render(){
+  const host=$("#pane-"+state.plane);
+  if(!host) return;
+  host.innerHTML = RENDERERS[state.plane]();
+  bindPane();
+  host.focus?.();
+}
+
+function bindPane(){
+  /* segmented controls */
+  const seg=(id,fn)=>{const n=$("#"+id); if(!n) return;
+    n.querySelectorAll("button").forEach(b=>b.onclick=()=>{fn(b); render();});};
+  seg("termfilt", b=>state.termFilter=b.dataset.k);
+  seg("gfilt", b=>state.gfilter=b.dataset.k);
+  seg("editpair", b=>state.editPair=+b.dataset.i);
+  seg("mxsrc", b=>state.mxSrc=b.dataset.k);
+
+  const tq=$("#termq");
+  if(tq){ tq.oninput=()=>{ state.termQ=tq.value; render();
+    const n=$("#termq"); if(n){ n.focus(); n.setSelectionRange(n.value.length,n.value.length); } }; }
+
+  const th=$("#th");
+  if(th) th.oninput=()=>{ state.thresh=+th.value; render(); };
+
+  $$("[data-mx]").forEach(td=>td.onclick=()=>{
+    state.mxSel = state.mxSel===td.dataset.mx ? null : td.dataset.mx; render(); });
+
+  $$("svg[data-g]").forEach(initCamera);
+
+  const ej=$("#expJSON"); if(ej) ej.onclick=exportJSON;
+  const ec=$("#expCSV"); if(ec) ec.onclick=exportCSV;
+  const ij=$("#impJSON"); if(ij) ij.onchange=importJSON;
+}
+
+/* ---------- pan / zoom ---------- */
+function initCamera(svg){
+  const cam=svg.querySelector(".cam");
+  let k=1,tx=0,ty=0,drag=null;
+  const apply=()=>cam.setAttribute("transform",`translate(${tx} ${ty}) scale(${k})`);
+  svg.addEventListener("wheel",e=>{
+    e.preventDefault();
+    const vb=svg.viewBox.baseVal, r=svg.getBoundingClientRect();
+    const mx=(e.clientX-r.left)/r.width*vb.width, my=(e.clientY-r.top)/r.height*vb.height;
+    const nk=Math.min(6,Math.max(.4,k*(e.deltaY<0?1.14:1/1.14)));
+    tx=mx-(mx-tx)*(nk/k); ty=my-(my-ty)*(nk/k); k=nk; apply();
+  },{passive:false});
+  const down=e=>{drag={x:e.clientX,y:e.clientY,tx,ty}; svg.classList.add("drag");};
+  const move=e=>{ if(!drag) return;
+    const vb=svg.viewBox.baseVal, r=svg.getBoundingClientRect();
+    tx=drag.tx+(e.clientX-drag.x)/r.width*vb.width;
+    ty=drag.ty+(e.clientY-drag.y)/r.height*vb.height; apply(); };
+  const up=()=>{drag=null; svg.classList.remove("drag");};
+  svg.addEventListener("pointerdown",down);
+  window.addEventListener("pointermove",move);
+  window.addEventListener("pointerup",up);
+  svg.addEventListener("dblclick",()=>{k=1;tx=0;ty=0;apply();});
+}
+
+/* ---------- data in / out ---------- */
+function currentDataset(){
+  return {concepts:CONCEPTS, versions:VERSIONS.map(v=>{
+    const {set,metrics,...rest}=v; return rest;
+  }), members:MEMBERS, skeleton:SKELETON, sited:SITED};
+}
+function dl(name, text, type){
+  const b=new Blob([text],{type}); const u=URL.createObjectURL(b);
+  const a=document.createElement("a"); a.href=u; a.download=name; a.click();
+  setTimeout(()=>URL.revokeObjectURL(u),400);
+}
+function exportJSON(){ dl("barr-dataset.json", JSON.stringify(currentDataset(),null,2), "application/json"); }
+function exportCSV(){
+  const head=["concept","type","year",...MODEL.versions.map(v=>v.name)].join(",");
+  const rows=MODEL.all.map(id=>{
+    const c=MODEL.concepts[id];
+    return ['"'+c.l.replace(/"/g,'""')+'"',c.t,c.y,
+      ...MODEL.versions.map(v=>v.set.has(id)?1:"")].join(",");
+  });
+  dl("barr-incidence.csv",[head,...rows].join("\n"),"text/csv");
+}
+function importJSON(e){
+  const f=e.target.files[0]; if(!f) return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      const d=JSON.parse(r.result);
+      if(!d.concepts||!d.versions) throw new Error("needs concepts and versions");
+      MODEL=buildModel(d.concepts,d.versions,d.members||{},d.skeleton||[],d.sited||{});
+      state.sel=new Set(MODEL.order); state.mxSel=null; state.editPair=0;
+      renderVersionBar(); render();
+      const m=$("#impMsg"); if(m){m.textContent=`Loaded ${MODEL.versions.length} states, ${MODEL.all.length} concepts.`; m.style.color="var(--moss)";}
+    }catch(err){
+      const m=$("#impMsg"); if(m){m.textContent="Could not read that file: "+err.message; m.style.color="var(--oxblood)";}
+    }
+  };
+  r.readAsText(f);
+}
+
+/* ---------- boot ---------- */
+function boot(){
+  MODEL=buildModel(CONCEPTS,VERSIONS,MEMBERS,SKELETON,SITED);
+  state.sel=new Set(MODEL.order);
+  renderSpine(); renderVersionBar();
+  $$(".pnav").forEach(b=>b.onclick=()=>{
+    state.plane=b.dataset.p;
+    $$(".pnav").forEach(x=>x.classList.toggle("on",x===b));
+    $$(".pane").forEach(p=>p.classList.toggle("on",p.id==="pane-"+state.plane));
+    render(); window.scrollTo({top:0,behavior:"instant"});
+  });
+  render();
+  let t; window.addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(renderSpine,150);});
+}
+document.addEventListener("DOMContentLoaded",boot);
+
+</script>
+</body>
+</html>
