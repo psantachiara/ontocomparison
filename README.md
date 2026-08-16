@@ -46,9 +46,12 @@ Drawings distinguish the three; **the metrics do not** — PageRank, density and
 all arcs together. That is why Paris ranks first on the jacket, and it is a coding choice worth
 arguing about in the paper rather than a property of Barr's chart.
 
-## The year axis
+## The two year scales, and only one of them is real
 
-Vertical position **is** the date, on the same linear scale Barr ruled on both margins of his
+The ruled margin down the left edge of the **page** is an echo of Barr's sheets, which he ruled
+on both sides. It is a border: evenly spaced ticks, no numerals, nothing aligned to it.
+
+The axis inside each **graph on Plane III** is the real one. Vertical position **is** the date, on the same linear scale Barr ruled on both margins of his
 sheets. Equal vertical gaps are equal spans of time. Horizontal position carries no meaning —
 it is barycentre ordering, arranged to minimise crossings.
 
@@ -65,9 +68,14 @@ chart's logic, so they sit at the median date of whatever they are attached to.
 
 Create an `img/` folder beside `index.html` containing `p15.jpg`, `insert.jpg`, `p19.jpg`,
 `p21.jpg` and `cover.jpg`. Each States card loads its own image automatically and falls back to
-an instruction placeholder when the file is absent; clicking opens the full-size image.
-File names follow the version `id`, so a renamed or added state needs a matching file. A
-`facsimile` path set explicitly in the dataset overrides the convention.
+an instruction placeholder when the file is absent. File names follow the version `id`, so a
+renamed or added state needs a matching file; a `facsimile` path set explicitly in the dataset
+overrides the convention.
+
+Clicking a facsimile opens it at page width over a blurred page, scrolling vertically. **Fit to
+screen** toggles to whole-sheet view, and the **arrow keys step between states** without closing
+— which is the point, since comparing two drafts at full size is otherwise a matter of opening
+tabs. Esc or a click outside closes. Only states whose image actually loaded enter the cycle.
 
 The MoMA Archives sheets (AHB VI.A.38) carry a study-use restriction — check your rights before
 publishing a page that serves them.
