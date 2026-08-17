@@ -1086,7 +1086,7 @@ function renderVersionBar(){
       <span class="vs">${esc(v.subtitle)}</span>
       <span class="vc">${v.metrics.n} concepts · ${v.metrics.m} relations</span>
     </button>`).join("")
-    + `<span class="vhint">click to filter every plane</span>`;
+    + `<span class="vhint">include or exclude states</span>`;
   bar.querySelectorAll(".vchip").forEach(b=>b.onclick=()=>{
     const id=b.dataset.v;
     if(state.sel.has(id)){ if(state.sel.size>1) state.sel.delete(id); }
