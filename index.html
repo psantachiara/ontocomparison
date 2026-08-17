@@ -21,7 +21,9 @@
   --disp:"Archivo Narrow","Helvetica Neue",Arial,sans-serif;
   --prose:"Spectral",Georgia,serif;
   --spine:24px;
-  --measure:961px; /* the width of the five state chips, which never stretch */
+  --measure:1115px; /* all five chips wide: text ends on the Cover chip's right edge,
+                       level with the last plane tab. Kept in sync by syncChipWidth();
+                       this is the no-JS fallback. */
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -1828,7 +1830,7 @@ function initCamera(svg){
    sized by its own label, which moves when the webfont loads or a label changes. */
 function syncChipWidth(){
   const root=document.documentElement;
-  const clear=()=>root.style.removeProperty("--chipw");
+  const clear=()=>{root.style.removeProperty("--chipw"); root.style.removeProperty("--measure");};
   if(window.innerWidth<=860) return clear();          // chips scroll on mobile
   const chips=$$(".vchip"), tabs=$$(".pnav");
   if(!chips.length || !tabs.length) return clear();
@@ -1836,7 +1838,11 @@ function syncChipWidth(){
   const left=chips[0].getBoundingClientRect().left;
   const right=tabs[tabs.length-1].getBoundingClientRect().right;
   const w=(right-left)/chips.length;
-  if(w>=132 && w<=420) root.style.setProperty("--chipw", w.toFixed(2)+"px");
+  if(w<132 || w>420) return;
+  root.style.setProperty("--chipw", w.toFixed(2)+"px");
+  /* Body measure ends on the last chip's right edge — level with the final plane tab —
+     so it stays tied to the chips rather than to a number that goes stale when they resize. */
+  root.style.setProperty("--measure", (w*chips.length).toFixed(2)+"px");
 }
 
 /* ---------- facsimile lightbox ---------- */
