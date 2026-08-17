@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Five States of a Chart — a comparison instrument for Barr's Cubism and Abstract Art diagrams</title>
+<title>Five States of a Chart — a comparison tool for Barr's Cubism and Abstract Art diagrams</title>
 <meta name="description" content="An interactive five-plane comparison of Alfred H. Barr, Jr.'s successive chart drafts for Cubism and Abstract Art (MoMA, 1936).">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -304,7 +304,7 @@ body.lb-open{overflow:hidden}
 
 <div id="shell">
   <header id="masthead">
-    <div class="kicker">A five-plane comparison instrument</div>
+    <div class="kicker">A five-plane comparison tool</div>
     <h1>Five States of a Chart</h1>
     <p class="sub">Alfred H. Barr, Jr. drew the diagram on the jacket of <em>Cubism and Abstract Art</em> (MoMA, 1936) at least five times. This tool holds all five states at once and asks what changed, where, and under what pressure.</p>
   </header>
@@ -1049,7 +1049,7 @@ function label(v,id){ return surface(v,id,MODEL.concepts); }
    ============================================================ */
 /* The spine is Barr's ruled margin kept as a border. Evenly spaced ticks, no
    numerals: it is not a scale and nothing aligns to it. The one real year axis
-   in this instrument is drawn inside each graph on Plane III. */
+   in this tool is drawn inside each graph on Plane III. */
 function renderSpine(){
   const sp=$("#spine"), h=window.innerHeight;
   [...sp.querySelectorAll(".tk")].forEach(n=>n.remove());
@@ -1120,10 +1120,10 @@ function paneStates(){
   ${sizeSpark()}
   <p class="note">The profile is non-monotonic. Any account of the series as a progressive refinement has to explain the two contractions.</p>
 
-  <h3 class="sh">How to read this instrument</h3>
+  <h3 class="sh">How to read this tool</h3>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(232px,1fr))">
     <div class="card"><h4>The strip</h4><p style="margin:0;font-size:13.5px">${strip("cubism")} — five cells, one per state, in draft order. Filled means present. The last cell is red: that is the published jacket. The strip appears wherever a concept does.</p></div>
-    <div class="card"><h4>The spine</h4><p style="margin:0;font-size:13.5px">The ruled margin at the left edge is an echo of Barr's own sheets, which he ruled on both sides. It is a border, not a scale — the ticks are evenly spaced and carry no values. The one real year axis in this instrument is the one drawn inside each graph on <b>Plane III</b>, where a concept's height is its date.</p></div>
+    <div class="card"><h4>The spine</h4><p style="margin:0;font-size:13.5px">The ruled margin at the left edge is an echo of Barr's own sheets, which he ruled on both sides. It is a border, not a scale — the ticks are evenly spaced and carry no values. The one real year axis in this tool is the one drawn inside each graph on <b>Plane III</b>, where a concept's height is its date.</p></div>
     <div class="card"><h4>The version bar</h4><p style="margin:0;font-size:13.5px">Excluding a state removes it from every plane at once. Drop p21 and Insert and what remains is the public register on its own — p15 to p19 to the jacket — which behaves differently from the full five. The strip glyph always shows all ${MODEL.versions.length} cells, greying the ones you have excluded.</p></div>
     <div class="card"><h4>Divergence</h4><p style="margin:0;font-size:13.5px">Figures printed in red are places where this dataset disagrees with the counts published at NASKO 2025. See <b>Method &amp; provenance</b>.</p></div>
   </div>`;
@@ -1656,7 +1656,7 @@ function paneprag(){
     ["Brackets appear only at the jacket",
      "[ABSTRACT] EXPRESSIONISM hedges where ABSTRACT EXPRESSIONISM did not. Publication is where a classifier becomes accountable for a claim, and the bracket is the mark of that accountability — visible in no working state."],
     ["Modern Architecture enters last",
-     "The one concept unique to the published state, arriving with no precedent in any draft — the incidence table records it in the jacket alone. Plane II can tell you that; it cannot tell you why. A candidate worth testing in the archive is institutional: architecture had its own standing at MoMA by 1936, and the jacket is the state with an institution behind it. That is a hypothesis for the correspondence files, not a finding of this instrument."]
+     "The one concept unique to the published state, arriving with no precedent in any draft — the incidence table records it in the jacket alone. Plane II can tell you that; it cannot tell you why. A candidate worth testing in the archive is institutional: architecture had its own standing at MoMA by 1936, and the jacket is the state with an institution behind it. That is a hypothesis for the correspondence files, not a finding of this tool."]
   ];
 
   return `
@@ -1730,7 +1730,7 @@ function paneMethod(){
       <td class="num" style="${v.backEdges.length?"color:var(--oxblood)":""}">${v.backEdges.length}</td>
       <td class="lbl">${v.backEdges.length?v.backEdges.map(e=>esc(MODEL.concepts[e[0]].l)+" → "+esc(MODEL.concepts[e[1]].l)).join("; "):"—"}</td></tr>`).join("")}
   </tbody></table></div>
-  <p class="note">A back-edge means the coding asserts that A precedes B and B precedes A. The instrument removes it so the drawing stays a DAG, and reports it here so you can fix the coding instead. Zero is the number you want.</p>
+  <p class="note">A back-edge means the coding asserts that A precedes B and B precedes A. The tool removes it so the drawing stays a DAG, and reports it here so you can fix the coding instead. Zero is the number you want.</p>
 
   <h3 class="sh">Replace the dataset</h3>
   <p class="lede" style="margin-bottom:12px">Everything on this page is computed live from one object. Export it, edit it against your coding, and load it back — every plane recomputes.</p>
@@ -1743,7 +1743,7 @@ function paneMethod(){
   </div>
   <p class="note">The JSON carries five keys: <code>concepts</code>, <code>versions</code>, <code>members</code>, <code>skeleton</code>, <code>sited</code>. Movement membership and place attribution are stored once and expanded into arcs at load, so a personnel correction is a one-line edit rather than forty.</p>
 
-  <h3 class="sh">What this instrument cannot do</h3>
+  <h3 class="sh">What this tool cannot do</h3>
   <p class="lede">It does not illuminate motivation, and it does not connect the chart to the culture that produced it. It cannot see hesitation, erasure, the affective weight of a boxed category, or the institutional politics of a museum in 1936. Converting hedged, dashed, hand-annotated sheets into binary matrices is itself a priori standardisation performed by the analyst — publishing the crosswalk is the only available mitigation. Star's question returns here as a methodological obligation rather than a slogan.</p>`;
 }
 

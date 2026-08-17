@@ -1,11 +1,11 @@
 # Five States of a Chart
 
-An interactive five-plane comparison instrument for Alfred H. Barr, Jr.'s successive chart drafts
+An interactive five-plane comparison tool for Alfred H. Barr, Jr.'s successive chart drafts
 for *Cubism and Abstract Art* (MoMA, 1936): **p15, Insert, p19, p21, Cover**.
 
 ## Deploying to GitHub Pages
 
-The instrument is one self-contained file. Push this folder to a repository and enable Pages:
+The tool is one self-contained file. Push this folder to a repository and enable Pages:
 
 ```
 Settings → Pages → Source: Deploy from a branch → main / (root)
@@ -50,7 +50,8 @@ arguing about in the paper rather than a property of Barr's chart.
 
 The narrow ruled margin down the left edge of the **page** is an echo of Barr's sheets, which he
 ruled on both sides. It is a border and nothing more: 24px wide, evenly spaced unlabelled ticks,
-nothing aligned to it. Set `--spine` to `0px` in the stylesheet to remove it entirely.
+nothing aligned to it and no caption. Set `--spine` to `0px` in the stylesheet to remove it
+entirely.
 
 The axis inside each **graph on Plane III** is the real one. Vertical position **is** the date, on the same linear scale Barr ruled on both margins of his
 sheets. Equal vertical gaps are equal spans of time. Horizontal position carries no meaning —
