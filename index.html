@@ -80,6 +80,7 @@ h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.
   appearance:none; border:0; border-right:1px solid var(--rule);
   background:transparent; cursor:pointer; text-align:left;
   padding:10px 16px 11px; min-width:132px; position:relative;
+  width:var(--chipw, auto); flex:0 0 auto;
   font-family:inherit; color:var(--ink-3); transition:background .12s,color .12s;
 }
 .vchip:first-child{border-left:1px solid var(--rule)}
@@ -275,6 +276,12 @@ dl.dossier dd{margin:0; font-size:14px}
   letter-spacing:.07em; text-transform:uppercase; color:var(--ink-3);
 }
 body.lb-open{overflow:hidden}
+
+/* Below this the equalised chips leave too little room, and the hint drops to a
+   second line and grows the sticky bar. The affordance is a nicety; the space isn't. */
+@media (max-width:1400px){
+  #versionbar .vhint, #planenav .phint{display:none}
+}
 
 @media (max-width:860px){
   :root{--spine:0px}
@@ -1072,7 +1079,7 @@ function renderVersionBar(){
       <span class="vs">${esc(v.subtitle)}</span>
       <span class="vc">${v.metrics.n} concepts · ${v.metrics.m} relations</span>
     </button>`).join("")
-    + `<span class="vhint">click to include / exclude from every plane</span>`;
+    + `<span class="vhint">click to filter every plane</span>`;
   bar.querySelectorAll(".vchip").forEach(b=>b.onclick=()=>{
     const id=b.dataset.v;
     if(state.sel.has(id)){ if(state.sel.size>1) state.sel.delete(id); }
@@ -1815,6 +1822,23 @@ function initCamera(svg){
   svg.addEventListener("dblclick",()=>{k=1;tx=0;ty=0;apply();});
 }
 
+/* ---------- chip sizing ----------
+   Give every state chip the same width, chosen so the last one ends level with the
+   right edge of the final plane tab. Measured rather than hardcoded: the tab is
+   sized by its own label, which moves when the webfont loads or a label changes. */
+function syncChipWidth(){
+  const root=document.documentElement;
+  const clear=()=>root.style.removeProperty("--chipw");
+  if(window.innerWidth<=860) return clear();          // chips scroll on mobile
+  const chips=$$(".vchip"), tabs=$$(".pnav");
+  if(!chips.length || !tabs.length) return clear();
+  clear();                                            // measure the natural layout first
+  const left=chips[0].getBoundingClientRect().left;
+  const right=tabs[tabs.length-1].getBoundingClientRect().right;
+  const w=(right-left)/chips.length;
+  if(w>=132 && w<=420) root.style.setProperty("--chipw", w.toFixed(2)+"px");
+}
+
 /* ---------- facsimile lightbox ---------- */
 const LB={list:[], i:0, prev:null};
 function lbOpen(id){
@@ -1918,7 +1942,8 @@ function boot(){
     render(); window.scrollTo({top:0,behavior:"instant"});
   });
   render();
-  let t; window.addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(renderSpine,150);});
+  let t; window.addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>{renderSpine();syncChipWidth();},150);});
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(syncChipWidth);
   const bar=$("#stickybar"), mast=$("#masthead");
   const onScroll=()=>bar.classList.toggle("stuck", window.scrollY > mast.offsetHeight - 4);
   window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
