@@ -56,7 +56,7 @@ h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.
   letter-spacing:-.005em; margin:4px 0 2px; max-width:34ch;
 }
 #masthead .sub{
-  font-size:14px; color:var(--ink-2); max-width:62ch; margin:0 0 16px;
+  font-size:14px; color:var(--ink-2); max-width:none; margin:0 0 16px;
   font-style:italic;
 }
 
@@ -65,6 +65,7 @@ h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.
   position:sticky; top:0; z-index:38; background:var(--paper);
   border-top:1px solid var(--rule);
 }
+#versionbar, #planenav, #masthead{max-width:1500px}
 #stickybar.stuck{box-shadow:0 6px 16px -8px rgba(42,44,39,.35)}
 #stickybar.stuck .vchip{padding:6px 16px 7px}
 #stickybar.stuck .vchip .vs{display:none}
@@ -88,8 +89,8 @@ h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.
 .vchip.on{background:var(--card); color:var(--ink)}
 .vchip.on::before{content:""; position:absolute; left:0; right:0; top:0; height:3px; background:var(--oxblood)}
 .vchip:focus-visible{outline:2px solid var(--indigo); outline-offset:-2px}
-#versionbar .vhint{
-  align-self:center; margin-left:auto; padding:0 4px;
+#versionbar .vhint, #planenav .phint{
+  align-self:center; margin-left:auto; padding:0 4px; white-space:nowrap;
   font-family:var(--mono); font-size:10px; color:var(--ink-3); letter-spacing:.04em;
 }
 
@@ -114,7 +115,7 @@ main{padding:26px 30px 90px; max-width:1500px}
 .pane{display:none}
 .pane.on{display:block; animation:fade .22s ease-out}
 @keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
-.lede{max-width:70ch; font-size:16px; color:var(--ink-2); margin:0 0 24px}
+.lede{max-width:none; font-size:16px; color:var(--ink-2); margin:0 0 24px}
 .lede strong{color:var(--ink); font-weight:600}
 h2.ph{font-size:22px; text-transform:uppercase; letter-spacing:.03em; margin:0 0 3px}
 h3.sh{
@@ -279,7 +280,7 @@ body.lb-open{overflow:hidden}
   #versionbar{flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch}
   .vchip{flex:0 0 auto; min-width:118px; padding:9px 13px 10px}
   .vchip .vn{font-size:15px}
-  #versionbar .vhint{display:none}
+  #versionbar .vhint, #planenav .phint{display:none}
   h3.sh span{float:none; display:block; margin-top:5px}
   #masthead h1{font-size:30px}
   table.mx td{width:64px; height:46px}
@@ -319,6 +320,7 @@ body.lb-open{overflow:hidden}
     <button class="pnav" data-p="genetic"><b>IV</b>Genetic</button>
     <button class="pnav" data-p="prag"><b>V</b>Pragmatic</button>
     <button class="pnav" data-p="method"><b>§</b>Method &amp; provenance</button>
+    <span class="phint">planes of comparison</span>
   </nav>
   </div>
 
