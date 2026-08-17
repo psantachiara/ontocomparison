@@ -21,6 +21,7 @@
   --disp:"Archivo Narrow","Helvetica Neue",Arial,sans-serif;
   --prose:"Spectral",Georgia,serif;
   --spine:24px;
+  --title-size:clamp(28px,4.2vw,46px);
   --measure:1115px; /* all five chips wide: text ends on the Cover chip's right edge,
                        level with the last plane tab. Kept in sync by syncChipWidth();
                        this is the no-JS fallback. */
@@ -53,9 +54,13 @@ h1,h2,h3,h4{margin:0; font-family:var(--disp); font-weight:600; letter-spacing:.
 #masthead .kicker{
   font-family:var(--disp); font-size:11px; letter-spacing:.2em; text-transform:uppercase;
   color:var(--oxblood); font-weight:600;
+  /* Optical, not structural: both boxes start at the same x, but the title's first
+     glyph carries a left side bearing of ~0.065em while the kicker's does not.
+     Scaled off the title size so it holds as the heading shrinks. */
+  margin-left:calc(var(--title-size) * 0.065);
 }
 #masthead h1{
-  font-size:clamp(28px,4.2vw,46px); font-weight:700; text-transform:uppercase;
+  font-size:var(--title-size); font-weight:700; text-transform:uppercase;
   letter-spacing:-.005em; margin:4px 0 2px; max-width:34ch;
 }
 #masthead .sub{
